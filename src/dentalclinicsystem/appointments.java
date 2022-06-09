@@ -408,18 +408,24 @@ ResultSet Rs = null, Rs1 = null;
 
                 JOptionPane.showMessageDialog(this, "Appointment Added Successfully");
                 Con.close();
-                DisplayAppointment();
-                Clear();
                 
-             
+                DisplayAppointment();
+               
+                
+                  //send email to the patient
+                 mailcontrol m = new mailcontrol();
+                 m.storemaildata(PatName.getSelectedItem().toString(),TreatName.getSelectedItem().toString(),AppDate.getDate().toString(), String.valueOf(AppTime.getDate().getTime()));
+                 m.email();
+       
+                  //clear text data
+               Clear();
+            
+              
             }catch(Exception Ex){
                 Ex.printStackTrace();
             }
                   
-                //send email to the patient
-               mailcontrol m = new mailcontrol();
-               m.storemaildata(PatName.getSelectedItem().toString(),TreatName.getSelectedItem().toString(),AppDate.getDate().toString(), String.valueOf(AppTime.getDate().getTime()));
-                //    m.email();
+              
            
             
         }
@@ -440,6 +446,13 @@ ResultSet Rs = null, Rs1 = null;
                 JOptionPane.showMessageDialog(this, "Appointment Updated Successfully");
 
                 DisplayAppointment();
+                
+                //send email to the patient
+                 mailcontrol m = new mailcontrol();
+                 m.storemaildata(PatName.getSelectedItem().toString(),TreatName.getSelectedItem().toString(),AppDate.getDate().toString(), String.valueOf(AppTime.getDate().getTime()));
+                 m.email();
+       
+                 //clear text data
                 Clear();
 
             }catch(Exception Ex){

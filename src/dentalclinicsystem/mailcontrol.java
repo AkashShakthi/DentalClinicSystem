@@ -26,6 +26,7 @@ public class mailcontrol extends javax.swing.JFrame{
     
     String from, to, host, sub,content;
     
+    
     public void email(){
         
         from = "dentalclinic.official@gmail.com";
@@ -82,7 +83,7 @@ ResultSet Rs = null, Rs1 = null;
  static   String reciverName,appointDate, appointTime ;
  static   int treatcost; 
    
- 
+
     
  public  void storemaildata(String name, String treat, String date, String time){
         
@@ -92,8 +93,9 @@ ResultSet Rs = null, Rs1 = null;
          Rs = St.executeQuery("Select * from root.PATIENTTBL where PATNAME='"+name+"'");
          St1 = (Statement) Con.createStatement();
          Rs1 = St1.executeQuery("Select TREATMENTCOST from root.TREATMENTTBL where TREATMENTNAME='"+treat+"'");
-       
-    
+        Rs.next();
+         Rs1.next();
+        
         this.to = Rs.getString("PATEMAIL");
          this.reciverName = name;
          this.appointDate = date;
@@ -101,11 +103,10 @@ ResultSet Rs = null, Rs1 = null;
          this.treatcost = Rs1.getInt("TREATMENTCOST");
        
          this.sub = "Hello " +reciverName+" This is your Dental Clinic Appointment Details. ";
-         this.content = "Your "+treat+"Appintment </br> Date is : "+appointDate+". </br> Time is : "+appointTime+". </br> Payment is: Rs."+treatcost+".00/= </br> Thank you. "; 
-         JOptionPane.showMessageDialog(this, "methnta enkm working");        
-         
+         this.content = "Your "+treat+" Appintment Date is : "+appointDate+" and Time is : "+appointTime+". The Treatment Payment is: Rs."+treatcost+".00 /=  Thank you. "; 
+        
      }catch(Exception Ex){
-               
+              Ex.printStackTrace(); 
             }
     }    
         
