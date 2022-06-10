@@ -1,4 +1,3 @@
-
 package dentalclinicsystem;
 
 import java.sql.Statement;
@@ -10,29 +9,22 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
-
 /**
  *
  * @author akash
  */
 public class treatment extends javax.swing.JFrame {
 
- 
-
-      
     public treatment() {
         initComponents();
         TreatCount();
         DisplayTreatment();
-        
-        
+
         //display logedusername
         user User = new user();
-       usernameDisplay.setText(User.username());
+        usernameDisplay.setText(User.username());
     }
 
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -56,6 +48,7 @@ public class treatment extends javax.swing.JFrame {
         logout = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         dashboardlabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         usernameDisplay = new javax.swing.JLabel();
 
         setUndecorated(true);
@@ -207,10 +200,6 @@ public class treatment extends javax.swing.JFrame {
             }
         });
 
-        usernameDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        usernameDisplay.setForeground(new java.awt.Color(0, 255, 204));
-        usernameDisplay.setText("User");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -223,9 +212,7 @@ public class treatment extends javax.swing.JFrame {
                 .addContainerGap(42, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(usernameDisplay)
-                    .addComponent(logout))
+                .addComponent(logout)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -235,12 +222,16 @@ public class treatment extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(165, 165, 165)
                 .addComponent(dashboardlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
-                .addComponent(usernameDisplay)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 299, Short.MAX_VALUE)
                 .addComponent(logout)
                 .addGap(48, 48, 48))
         );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dentalclinicsystem/logger.png"))); // NOI18N
+
+        usernameDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        usernameDisplay.setForeground(new java.awt.Color(0, 51, 51));
+        usernameDisplay.setText("User");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -249,10 +240,6 @@ public class treatment extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel12)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(115, 115, 115)
                         .addComponent(jLabel13)
@@ -261,23 +248,9 @@ public class treatment extends javax.swing.JFrame {
                         .addGap(183, 183, 183)
                         .addComponent(jLabel18)
                         .addGap(99, 99, 99))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel19)
-                        .addGap(288, 288, 288))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TreatName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)
-                                .addComponent(TreatCost, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)
-                                .addComponent(TreatMed, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(94, 94, 94)
@@ -285,17 +258,46 @@ public class treatment extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(95, 95, 95)
-                                .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(56, Short.MAX_VALUE))))
+                                .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(TreatName, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(68, 68, 68)
+                                .addComponent(TreatCost, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(64, 64, 64)
+                                .addComponent(TreatMed, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel19)
+                                .addGap(288, 288, 288))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel1)
+                                .addGap(5, 5, 5)
+                                .addComponent(usernameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel12)
+                                .addGap(11, 11, 11))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel12)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addComponent(jLabel12)
+                        .addGap(33, 33, 33)
+                        .addComponent(TreatMed, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(usernameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(4, 4, 4)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -312,14 +314,11 @@ public class treatment extends javax.swing.JFrame {
                             .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel19))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(TreatMed, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(jLabel19)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(4, 4, 4))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+                .addGap(6, 6, 6))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -330,7 +329,7 @@ public class treatment extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
         );
 
         pack();
@@ -345,80 +344,77 @@ public class treatment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TreatMedActionPerformed
 
-       private void Clear(){
-           TreatName.setText("");
-           TreatCost.setText("");
-           TreatMed.setText("");
-           Key = 1000;
-       
-       } 
+    private void Clear() {
+        TreatName.setText("");
+        TreatCost.setText("");
+        TreatMed.setText("");
+        Key = 1000;
+
+    }
     private void clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseClicked
-     Clear();
+        Clear();
     }//GEN-LAST:event_clearMouseClicked
 
-Connection Con = null;
-Statement St = null , St1 = null;
-ResultSet Rs = null, Rs1 = null;
+    Connection Con = null;
+    Statement St = null, St1 = null;
+    ResultSet Rs = null, Rs1 = null;
 
-   private void DisplayTreatment(){
-    
-     try{
-         Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-         St = (Statement) Con.createStatement();
-         Rs = St.executeQuery("Select * from root.TreatmentTbl ");
-         TreatmentTable.setModel(DbUtils.resultSetToTableModel(Rs));
-     }catch(Exception Ex){
-               
-            }
+    private void DisplayTreatment() {
+
+        try {
+            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            St = (Statement) Con.createStatement();
+            Rs = St.executeQuery("Select * from root.TreatmentTbl ");
+            TreatmentTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch (Exception Ex) {
+
+        }
     }
-  
-   
- 
-   
-      int TreatId = 0;
-    private void TreatCount(){
-    try{
-        St1 = Con.createStatement();
-        Rs1 = St1.executeQuery("select Max(TreatmentId) from root.TreatmentTbl");
-        Rs1.next();
-        TreatId = Rs1.getInt(1)+1;
-       
+
+    int TreatId = 0;
+
+    private void TreatCount() {
+        try {
+            St1 = Con.createStatement();
+            Rs1 = St1.executeQuery("select Max(TreatmentId) from root.TreatmentTbl");
+            Rs1.next();
+            TreatId = Rs1.getInt(1) + 1;
+
+        } catch (Exception Ex) {
+            Ex.printStackTrace();
+        }
     }
-    catch(Exception Ex){
-        Ex.printStackTrace();
-    }
-    } 
-   
+
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-  // TODO add your handling code here:gfghfgfgfgfgfgfgdsfgdfgdfgdfdsf
-        if(TreatName.getText().isEmpty() || TreatCost.getText().isEmpty() ||TreatMed.getText().isEmpty() ){
+        // TODO add your handling code here:gfghfgfgfgfgfgfgdsfgdfgdfgdfdsf
+        if (TreatName.getText().isEmpty() || TreatCost.getText().isEmpty() || TreatMed.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Missing Information");
-        }else{
-            try{
-               // int PatKey = 1;
+        } else {
+            try {
+                // int PatKey = 1;
                 TreatCount();
-               
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
+
+                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
                 PreparedStatement add = Con.prepareStatement("insert into TreatmentTbl values(?,?,?,?)");
                 add.setInt(1, TreatId);
                 add.setString(2, TreatName.getText());
-                add.setInt(3,Integer.valueOf(TreatCost.getText()) );
+                add.setInt(3, Integer.valueOf(TreatCost.getText()));
                 add.setString(4, TreatMed.getText());
-         
-              int row = add.executeUpdate();
-               
-                 JOptionPane.showMessageDialog(this, "Patient Added Successfully");
-               Con.close();
+
+                int row = add.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, "Patient Added Successfully");
+                Con.close();
                 DisplayTreatment();
-                  Clear();
-            }catch(Exception Ex){
+                Clear();
+            } catch (Exception Ex) {
                 Ex.printStackTrace();
             }
-    }
-      
+        }
+
     }//GEN-LAST:event_saveMouseClicked
 
-    
+
     private void TreatNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TreatNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TreatNameActionPerformed
@@ -429,34 +425,34 @@ ResultSet Rs = null, Rs1 = null;
 
     int Key = 1000;
     private void TreatmentTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TreatmentTableMouseClicked
- 
-           DefaultTableModel model = (DefaultTableModel) TreatmentTable.getModel();
+
+        DefaultTableModel model = (DefaultTableModel) TreatmentTable.getModel();
         int MyIndex = TreatmentTable.getSelectedRow();
         Key = Integer.valueOf(model.getValueAt(MyIndex, 0).toString());
         TreatName.setText(model.getValueAt(MyIndex, 1).toString());
         TreatCost.setText(model.getValueAt(MyIndex, 2).toString());
         TreatMed.setText(model.getValueAt(MyIndex, 3).toString());
-      
+
     }//GEN-LAST:event_TreatmentTableMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-  if(Key == 1000){
+        if (Key == 1000) {
             JOptionPane.showMessageDialog(this, "Select The Treatment");
-        }else{
-            try{
-                
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-               String Query = "Delete from Root.TreatmentTbl where TreatmentId="+Key;
-               Statement Add = Con.createStatement();
-               Add.executeUpdate(Query);
-               JOptionPane.showMessageDialog(this, " Treatment Deleted Successfully");
-            
+        } else {
+            try {
+
+                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                String Query = "Delete from Root.TreatmentTbl where TreatmentId=" + Key;
+                Statement Add = Con.createStatement();
+                Add.executeUpdate(Query);
+                JOptionPane.showMessageDialog(this, " Treatment Deleted Successfully");
+
                 DisplayTreatment();
-                     Clear();  
-            }catch(Exception Ex){
+                Clear();
+            } catch (Exception Ex) {
                 Ex.printStackTrace();
             }
-    }    
+        }
     }//GEN-LAST:event_deleteMouseClicked
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
@@ -465,24 +461,24 @@ ResultSet Rs = null, Rs1 = null;
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
         // TODO add your handling code here:
-          if(Key == 1000){
+        if (Key == 1000) {
             JOptionPane.showMessageDialog(this, "Select The Treatment");
-        }else{
-            try{
-                
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-               String Query = "Update Root.TreatmentTbl set TREATMENTNAME='"+TreatName.getText()+"'"+", TREATMENTCOST="+TreatCost.getText()+""+", TREATMENTMED='"+TreatMed.getText()+"'"+"  where TREATMENTID="+Key;
-               Statement Add = Con.createStatement();
-               Add.executeUpdate(Query);
-               JOptionPane.showMessageDialog(this, "Treatment Updated Successfully");
-            
+        } else {
+            try {
+
+                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                String Query = "Update Root.TreatmentTbl set TREATMENTNAME='" + TreatName.getText() + "'" + ", TREATMENTCOST=" + TreatCost.getText() + "" + ", TREATMENTMED='" + TreatMed.getText() + "'" + "  where TREATMENTID=" + Key;
+                Statement Add = Con.createStatement();
+                Add.executeUpdate(Query);
+                JOptionPane.showMessageDialog(this, "Treatment Updated Successfully");
+
                 DisplayTreatment();
-                   Clear();
-                  
-            }catch(Exception Ex){
+                Clear();
+
+            } catch (Exception Ex) {
                 Ex.printStackTrace();
             }
-    }
+        }
     }//GEN-LAST:event_editMouseClicked
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
@@ -500,7 +496,7 @@ ResultSet Rs = null, Rs1 = null;
 
     private void dashboardlabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardlabelMouseClicked
         // TODO add your handling code here:
-         new Dashboard().setVisible(true);
+        new Dashboard().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_dashboardlabelMouseClicked
 
@@ -548,6 +544,7 @@ ResultSet Rs = null, Rs1 = null;
     private javax.swing.JLabel dashboardlabel;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

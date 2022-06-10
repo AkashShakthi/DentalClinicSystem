@@ -70,10 +70,8 @@ public class doctors extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        docPass = new javax.swing.JTextField();
         DocName = new javax.swing.JTextField();
         DocEmail = new javax.swing.JTextField();
-        docConPass = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         UserRolll = new javax.swing.JComboBox<>();
         DocMobile = new javax.swing.JTextField();
@@ -84,7 +82,12 @@ public class doctors extends javax.swing.JFrame {
         logout = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         dashboardlabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         usernameDisplay = new javax.swing.JLabel();
+        docPass = new javax.swing.JPasswordField();
+        docConPass = new javax.swing.JPasswordField();
+        openeye = new javax.swing.JLabel();
+        closeeye = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(900, 600));
         setUndecorated(true);
@@ -161,14 +164,6 @@ public class doctors extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel20.setText("Conform Password");
 
-        docPass.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        docPass.setPreferredSize(new java.awt.Dimension(100, 20));
-        docPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                docPassActionPerformed(evt);
-            }
-        });
-
         DocName.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         DocName.setPreferredSize(new java.awt.Dimension(100, 20));
         DocName.addActionListener(new java.awt.event.ActionListener() {
@@ -182,14 +177,6 @@ public class doctors extends javax.swing.JFrame {
         DocEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DocEmailActionPerformed(evt);
-            }
-        });
-
-        docConPass.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
-        docConPass.setPreferredSize(new java.awt.Dimension(100, 20));
-        docConPass.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                docConPassActionPerformed(evt);
             }
         });
 
@@ -260,10 +247,6 @@ public class doctors extends javax.swing.JFrame {
             }
         });
 
-        usernameDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        usernameDisplay.setForeground(new java.awt.Color(0, 255, 204));
-        usernameDisplay.setText("User");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -277,9 +260,7 @@ public class doctors extends javax.swing.JFrame {
                 .addContainerGap(41, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(56, 56, 56)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(usernameDisplay)
-                    .addComponent(logout))
+                .addComponent(logout)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -292,11 +273,29 @@ public class doctors extends javax.swing.JFrame {
                 .addGap(86, 86, 86)
                 .addComponent(dashboardlabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(usernameDisplay)
-                .addGap(18, 18, 18)
                 .addComponent(logout)
                 .addGap(48, 48, 48))
         );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dentalclinicsystem/logger.png"))); // NOI18N
+
+        usernameDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        usernameDisplay.setForeground(new java.awt.Color(0, 51, 51));
+        usernameDisplay.setText("User");
+
+        openeye.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dentalclinicsystem/open eye.png"))); // NOI18N
+        openeye.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                openeyeMouseClicked(evt);
+            }
+        });
+
+        closeeye.setIcon(new javax.swing.ImageIcon(getClass().getResource("/dentalclinicsystem/closeeye.png"))); // NOI18N
+        closeeye.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeeyeMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -306,9 +305,19 @@ public class doctors extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel22)
+                        .addGap(165, 165, 165)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(UserRolll, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel21)
+                                .addGap(155, 155, 155)
+                                .addComponent(jLabel20)
+                                .addGap(74, 74, 74))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -326,11 +335,6 @@ public class doctors extends javax.swing.JFrame {
                                                 .addGap(61, 61, 61)))))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(78, 78, 78)
-                                        .addComponent(DocEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(docPass, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(141, 141, 141)
@@ -338,53 +342,58 @@ public class doctors extends javax.swing.JFrame {
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addGap(34, 34, 34)
                                                 .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(24, 24, 24)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(docConPass, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGap(98, 98, 98)
-                                                        .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                                .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(98, 98, 98)
+                                                .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(jLabel18)
-                                                .addGap(46, 46, 46)))))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(openeye)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(closeeye))))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(78, 78, 78)
+                                        .addComponent(DocEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(docConPass, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(docPass, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(46, 46, 46))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(304, 304, 304)
                                 .addComponent(jLabel19)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(jLabel22)
-                        .addGap(165, 165, 165)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(UserRolll, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel21)
-                                .addGap(155, 155, 155)
-                                .addComponent(jLabel20)
-                                .addGap(74, 74, 74))))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(usernameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel12))
+                                    .addComponent(jScrollPane1))))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12)
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel17))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel1)
+                    .addComponent(usernameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel16)
+                        .addComponent(jLabel18)
+                        .addComponent(jLabel17))
+                    .addComponent(openeye, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(closeeye, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DocName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -397,16 +406,16 @@ public class doctors extends javax.swing.JFrame {
                     .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(docConPass, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UserRolll, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DocMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DocMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(docConPass, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -429,10 +438,6 @@ public class doctors extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void docPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_docPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_docPassActionPerformed
-
     private void DocNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DocNameActionPerformed
@@ -440,10 +445,6 @@ public class doctors extends javax.swing.JFrame {
     private void DocEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DocEmailActionPerformed
-
-    private void docConPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_docConPassActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_docConPassActionPerformed
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
         
@@ -528,6 +529,20 @@ public class doctors extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_dashboardlabelMouseClicked
 
+    private void openeyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openeyeMouseClicked
+        // TODO add your handling code here:
+
+        docPass.setEchoChar((char)0);
+        docConPass.setEchoChar((char)0);
+    }//GEN-LAST:event_openeyeMouseClicked
+
+    private void closeeyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeeyeMouseClicked
+        // TODO add your handling code here:
+
+        docPass.setEchoChar('*');
+        docConPass.setEchoChar('*');
+    }//GEN-LAST:event_closeeyeMouseClicked
+
   
     
     
@@ -581,11 +596,13 @@ public class doctors extends javax.swing.JFrame {
     private javax.swing.JTable DoctorTable;
     private javax.swing.JComboBox<String> UserRolll;
     private javax.swing.JButton clear;
+    private javax.swing.JLabel closeeye;
     private javax.swing.JLabel dashboardlabel;
     private javax.swing.JButton delete;
-    private javax.swing.JTextField docConPass;
-    private javax.swing.JTextField docPass;
+    private javax.swing.JPasswordField docConPass;
+    private javax.swing.JPasswordField docPass;
     private javax.swing.JButton edit;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
@@ -599,6 +616,7 @@ public class doctors extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logout;
+    private javax.swing.JLabel openeye;
     private javax.swing.JLabel receptionistslabel;
     private javax.swing.JButton save;
     private javax.swing.JLabel usernameDisplay;
