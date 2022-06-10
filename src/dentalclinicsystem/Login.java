@@ -1,5 +1,6 @@
 package dentalclinicsystem;
 
+import static dentalclinicsystem.user.logUserName;
 import javax.swing.JOptionPane;
 
 /*
@@ -193,21 +194,6 @@ public class Login extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, "Enter Username and Password");
         }else if(User.checkloginuser(email.getText(), password.getText()) == true ){
             
-            if(User.LogedUserRoll.equals("Admin")){
-              JOptionPane.showMessageDialog(this, "welcome admin");
-            /*new users().setVisible(true);
-            this.dispose();*/
-            }
-            if(User.LogedUserRoll.equals("Doctor")){
-              JOptionPane.showMessageDialog(this, "welcome Doctor");
-                  /* new treatment().setVisible(true);
-                this.dispose();*/
-            }
-             if(User.LogedUserRoll.equals("Receptionist")){
-              JOptionPane.showMessageDialog(this, "welcome Receptionist");
-                /*  new appointments().setVisible(true);
-                 this.dispose();*/
-            }
          new Dashboard().setVisible(true);
             this.dispose();
         }else{

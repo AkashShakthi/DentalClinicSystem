@@ -26,7 +26,9 @@ public class treatment extends javax.swing.JFrame {
         DisplayTreatment();
         
         
-       
+        //display logedusername
+        user User = new user();
+       usernameDisplay.setText(User.username());
     }
 
     
@@ -54,6 +56,7 @@ public class treatment extends javax.swing.JFrame {
         logout = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         dashboardlabel = new javax.swing.JLabel();
+        usernameDisplay = new javax.swing.JLabel();
 
         setUndecorated(true);
 
@@ -202,20 +205,26 @@ public class treatment extends javax.swing.JFrame {
             }
         });
 
+        usernameDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        usernameDisplay.setForeground(new java.awt.Color(0, 255, 204));
+        usernameDisplay.setText("User");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(logout)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(dashboardlabel)
                     .addComponent(jLabel14))
                 .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usernameDisplay)
+                    .addComponent(logout))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +233,9 @@ public class treatment extends javax.swing.JFrame {
                 .addComponent(jLabel14)
                 .addGap(165, 165, 165)
                 .addComponent(dashboardlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                .addComponent(usernameDisplay)
+                .addGap(18, 18, 18)
                 .addComponent(logout)
                 .addGap(48, 48, 48))
         );
@@ -283,10 +294,11 @@ public class treatment extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel18)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel13))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel16)
+                                .addComponent(jLabel13)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(TreatName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -545,5 +557,6 @@ ResultSet Rs = null, Rs1 = null;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logout;
     private javax.swing.JButton save;
+    private javax.swing.JLabel usernameDisplay;
     // End of variables declaration//GEN-END:variables
 }

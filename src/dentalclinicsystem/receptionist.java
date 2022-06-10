@@ -30,7 +30,8 @@ public class receptionist extends javax.swing.JFrame {
        //for display data on table
        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
         
-       
+      //display logedusername
+       usernameDisplay.setText(User.username());
        
     }
     
@@ -78,6 +79,7 @@ public class receptionist extends javax.swing.JFrame {
         logout = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         dashboardlabel = new javax.swing.JLabel();
+        usernameDisplay = new javax.swing.JLabel();
 
         setUndecorated(true);
 
@@ -251,14 +253,14 @@ public class receptionist extends javax.swing.JFrame {
             }
         });
 
+        usernameDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        usernameDisplay.setForeground(new java.awt.Color(0, 255, 204));
+        usernameDisplay.setText("User");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(logout)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,6 +268,12 @@ public class receptionist extends javax.swing.JFrame {
                     .addComponent(docotorslabel)
                     .addComponent(jLabel14))
                 .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usernameDisplay)
+                    .addComponent(logout))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +284,9 @@ public class receptionist extends javax.swing.JFrame {
                 .addComponent(docotorslabel)
                 .addGap(86, 86, 86)
                 .addComponent(dashboardlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(usernameDisplay)
+                .addGap(18, 18, 18)
                 .addComponent(logout)
                 .addGap(48, 48, 48))
         );
@@ -385,7 +395,7 @@ public class receptionist extends javax.swing.JFrame {
                     .addComponent(UserRolll, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
                     .addComponent(RepMobile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(RepConPass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(delete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -571,5 +581,6 @@ public class receptionist extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logout;
     private javax.swing.JButton save;
+    private javax.swing.JLabel usernameDisplay;
     // End of variables declaration//GEN-END:variables
 }

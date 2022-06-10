@@ -44,11 +44,19 @@ ResultSet Rs = null, Rs1 = null ,Rs2 = null ;
     
     //for login
     static  boolean isuserlogged = false;
-    static  String LogedUserRoll = "";
+    static  String LogedUserRoll = "" ,logUserName = "";
     static  int logeduserid = 0 , emailuid=0, passuid=0;
     
    //userroll controll
    //static  boolean admin=false, doctor=false,receptionist=false;
+    
+    
+    //username display
+    public String username(){
+      String[]  userfirstname = logUserName.split("\\ ");
+      userfirstname[0] = userfirstname[0].substring(0, 1).toUpperCase() + userfirstname[0].substring(1);
+     return userfirstname[0];
+    }
     
     // for counting users and get next user id
     public void userCount(){
@@ -256,9 +264,10 @@ ResultSet Rs = null, Rs1 = null ,Rs2 = null ;
        
           
           St2 = (Statement) Con.createStatement();
-          Rs2 = St2.executeQuery("Select USERROLL from root.USERTBL where USERID="+logeduserid);
+          Rs2 = St2.executeQuery("Select * from root.USERTBL where USERID="+logeduserid);
           Rs2.next();
           LogedUserRoll = Rs2.getString("USERROLL");
+          logUserName  = Rs2.getString("USERNAME");
           isuserlogged =true;
           
          }

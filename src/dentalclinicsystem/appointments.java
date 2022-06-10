@@ -22,7 +22,10 @@ public class appointments extends javax.swing.JFrame {
        DisplayAppointment();
        Clear();
        
-      
+       
+        //display logedusername
+       user User = new user();
+       usernameDisplay.setText(User.username());
       
     }
     
@@ -60,6 +63,7 @@ ResultSet Rs = null, Rs1 = null;
         logout = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         dashboardlabel = new javax.swing.JLabel();
+        usernameDisplay = new javax.swing.JLabel();
 
         setUndecorated(true);
 
@@ -192,14 +196,14 @@ ResultSet Rs = null, Rs1 = null;
             }
         });
 
+        usernameDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        usernameDisplay.setForeground(new java.awt.Color(0, 255, 204));
+        usernameDisplay.setText("User");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(logout)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,6 +211,12 @@ ResultSet Rs = null, Rs1 = null;
                     .addComponent(Patientlabel)
                     .addComponent(jLabel14))
                 .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(usernameDisplay)
+                    .addComponent(logout))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +227,9 @@ ResultSet Rs = null, Rs1 = null;
                 .addComponent(Patientlabel)
                 .addGap(86, 86, 86)
                 .addComponent(dashboardlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(usernameDisplay)
+                .addGap(18, 18, 18)
                 .addComponent(logout)
                 .addGap(48, 48, 48))
         );
@@ -291,7 +303,7 @@ ResultSet Rs = null, Rs1 = null;
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                                 .addComponent(jLabel13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(PatName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -608,5 +620,6 @@ private void getTreatment(){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel logout;
     private javax.swing.JButton save;
+    private javax.swing.JLabel usernameDisplay;
     // End of variables declaration//GEN-END:variables
 }
