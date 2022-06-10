@@ -144,6 +144,7 @@ public class doctors extends javax.swing.JFrame {
                 "ID", "Doctor Name", "Email", "Mobile"
             }
         ));
+        DoctorTable.setSelectionForeground(new java.awt.Color(0, 51, 51));
         DoctorTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DoctorTableMouseClicked(evt);

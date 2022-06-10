@@ -211,6 +211,8 @@ public class receptionist extends javax.swing.JFrame {
                 "ID", "Doctor Name", "Email", "Mobile"
             }
         ));
+        ReceptionistTable.setSelectionBackground(new java.awt.Color(0, 204, 255));
+        ReceptionistTable.setSelectionForeground(new java.awt.Color(0, 51, 51));
         ReceptionistTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ReceptionistTableMouseClicked(evt);

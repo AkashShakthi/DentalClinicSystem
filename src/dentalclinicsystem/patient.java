@@ -187,7 +187,8 @@ public class patient extends javax.swing.JFrame {
             }
         ));
         PatientTable.setRowHeight(24);
-        PatientTable.setSelectionBackground(new java.awt.Color(0, 79, 17));
+        PatientTable.setSelectionBackground(new java.awt.Color(0, 204, 255));
+        PatientTable.setSelectionForeground(new java.awt.Color(0, 51, 51));
         PatientTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 PatientTableMouseClicked(evt);

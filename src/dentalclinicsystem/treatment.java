@@ -126,6 +126,8 @@ public class treatment extends javax.swing.JFrame {
                 "ID", "Treatment Name", "Cost", "Medicines"
             }
         ));
+        TreatmentTable.setSelectionBackground(new java.awt.Color(0, 204, 255));
+        TreatmentTable.setSelectionForeground(new java.awt.Color(0, 51, 51));
         TreatmentTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TreatmentTableMouseClicked(evt);

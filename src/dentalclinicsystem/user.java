@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
+//for password hasing
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 /**
@@ -73,13 +76,47 @@ ResultSet Rs = null, Rs1 = null ,Rs2 = null ;
     }
     }
     
-    // class for create new user
-     public void createuser( String Name, String email, String password, String conPassword , String userRoll , String userMobile ){
+    //password encrpted
+    public String ecryptdtext(String text){
+     String passwordToHash = text;
+    String generatedPassword = null;
+
+    try 
+    {
+      // Create MessageDigest instance for MD5
+      MessageDigest md = MessageDigest.getInstance("MD5");
+
+      // Add password bytes to digest
+      md.update(passwordToHash.getBytes());
+
+      // Get the hash's bytes
+      byte[] bytes = md.digest();
+
+      // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+      StringBuilder sb = new StringBuilder();
+      for (int i = 0; i < bytes.length; i++) {
+        sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+      }
+
+      // Get complete hashed password in hex format
+      generatedPassword = sb.toString();
+    } catch (NoSuchAlgorithmException e) {
+      e.printStackTrace();
+    }
+    return generatedPassword;
+    
+    }
+    
+
+
+
+// class for create new user
+     public void createuser( String Name, String email, String pass, String conPass , String userRoll , String userMobile ){
          
          this.Name = Name;
          this.email = email;
-         this.password = password;
-         this.conPassword = conPassword;
+         this.password = ecryptdtext(pass);
+         this.conPassword = ecryptdtext(conPass);
          this.userRoll = userRoll;
          this.userMobile = userMobile;
          
@@ -124,12 +161,12 @@ ResultSet Rs = null, Rs1 = null ,Rs2 = null ;
      }
      
     // class for edit user
-     public void edituser( int Key, String Name, String email, String password, String conPassword , String userRoll , String userMobile){
+     public void edituser( int Key, String Name, String email, String pass, String conPass , String userRoll , String userMobile){
           
          this.Name = Name;
          this.email = email;
-         this.password = password;
-         this.conPassword = conPassword;
+         this.password = ecryptdtext(pass);
+         this.conPassword = ecryptdtext(conPass);
          this.userRoll = userRoll;
          this.userMobile = userMobile;
          
@@ -239,9 +276,9 @@ ResultSet Rs = null, Rs1 = null ,Rs2 = null ;
     
     
     //check login user
-    public boolean checkloginuser(String email, String password ){
+    public boolean checkloginuser(String email, String pass ){
          this.email = email;
-         this.password = password;
+         this.password = ecryptdtext(pass);
        
        try{
          Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");

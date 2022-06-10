@@ -131,6 +131,8 @@ ResultSet Rs = null, Rs1 = null;
                 "ID", "Patient Name", "Treatment", "Date", "Time"
             }
         ));
+        AppointmentTable.setSelectionBackground(new java.awt.Color(0, 204, 255));
+        AppointmentTable.setSelectionForeground(new java.awt.Color(0, 51, 51));
         AppointmentTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 AppointmentTableMouseClicked(evt);
