@@ -21,8 +21,8 @@ public class treatment extends javax.swing.JFrame {
         DisplayTreatment();
 
         //display logedusername
-        user User = new user();
-        usernameDisplay.setText(User.LoggerName());
+        Login login = new Login();
+        usernameDisplay.setText(login.LoggerName());
     }
 
     @SuppressWarnings("unchecked")
@@ -487,8 +487,8 @@ public class treatment extends javax.swing.JFrame {
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         // TODO add your handling code here:
-        user User = new user();
-        User.logout();
+           Login login = new Login();
+          login.logout();
 
         this.dispose();
         new Login().setVisible(true);

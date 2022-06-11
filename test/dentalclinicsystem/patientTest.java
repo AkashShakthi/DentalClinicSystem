@@ -38,6 +38,18 @@ public class patientTest {
     }
 
     /**
+     * Test of addpatient method, of class patient.
+     */
+    @Test
+    public void testAddpatient() {
+        System.out.println("addpatient");
+        patient instance = new patient();
+        instance.addpatient();
+        // TODO review the generated test code and remove the default call to fail.
+       // fail("The test case is a prototype.");
+    }
+
+    /**
      * Test of main method, of class patient.
      */
     @Test

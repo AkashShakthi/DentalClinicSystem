@@ -19,36 +19,23 @@ import java.security.NoSuchAlgorithmException;
  * @author akash
  */
 public class user extends javax.swing.JFrame {
+    
+    
 
     //for sql connections
     Connection Con = null;
-    Statement St = null, St1 = null, St2 = null;
-    ResultSet Rs = null, Rs1 = null, Rs2 = null;
+    Statement St = null, St1 = null, St2 = null ,St3 =null;
+    ResultSet Rs = null, Rs1 = null, Rs2 = null ,Rs3 =null;
 
     int id = 0;
-
     String Name;
     String email;
     String password;
     String conPassword;
     String userRoll;
     String userMobile;
-
-    static boolean userexsist;
-
-    //for login
-    static boolean isuserlogged = false;
-    static String LogedUserRoll = "", logUserName = "";
-    static int logeduserid = 0, emailuid = 0, passuid = 0;
-
-   //This LoggerName function for 
-    public String LoggerName() {
-        String[] userfirstname = logUserName.split("\\ ");
-        userfirstname[0] = userfirstname[0].substring(0, 1).toUpperCase() + userfirstname[0].substring(1);
-        return userfirstname[0];
-    }
-
-    // for counting users and get next user id
+    
+        // for counting users and get next user id
     public void UserIdGenerator() {
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
@@ -62,41 +49,8 @@ public class user extends javax.swing.JFrame {
         }
     }
 
-    //password encrpted
-    static String text;
-    public String PasswordEncryptor(String text) {
-        this.text = text;
-        String passwordToHash = text;
-        String generatedPassword = null;
-
-        try {
-            // Create MessageDigest instance for MD5
-            MessageDigest md = MessageDigest.getInstance("MD5");
-
-            // Add password bytes to digest
-            md.update(passwordToHash.getBytes());
-
-            // Get the hash's bytes
-            byte[] bytes = md.digest();
-
-            // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-            }
-
-            // Get complete hashed password in hex format
-            generatedPassword = sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        return generatedPassword;
-
-    }
-
     
-    
-// class for create new user
+    // class for create new user
     public void createuser(String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
 
         this.Name = Name;
@@ -139,7 +93,6 @@ public class user extends javax.swing.JFrame {
 
     }
 
-    
     
     // class for edit user
     public void edituser(int Key, String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
@@ -189,7 +142,7 @@ public class user extends javax.swing.JFrame {
 
     }
 
-    
+
     
     public void deleteuser(int Key) {
 
@@ -226,8 +179,42 @@ public class user extends javax.swing.JFrame {
     }
 
     
+     //password encrpted
+    static String text;
+    public String PasswordEncryptor(String text) {
+        this.text = text;
+        String passwordToHash = text;
+        String generatedPassword = null;
+
+        try {
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+
+            // Add password bytes to digest
+            md.update(passwordToHash.getBytes());
+
+            // Get the hash's bytes
+            byte[] bytes = md.digest();
+
+            // This bytes[] has bytes in decimal format. Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            // Get complete hashed password in hex format
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
+
+    }
+
     
-    //chek user exist
+    
+      //chek user Alradyexist
+    static boolean userexsist;
     public boolean checkuserexist(String email) {
         this.email = email;
 
@@ -249,58 +236,7 @@ public class user extends javax.swing.JFrame {
     }
 
     
-    
-    //check login user
-    public boolean loginValidator(String email, String pass) {
-        this.email = email;
-        this.password = PasswordEncryptor(pass);
-
-        try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-            St = (Statement) Con.createStatement();
-            St1 = (Statement) Con.createStatement();
-
-            Rs = St.executeQuery("Select USERID from root.USERTBL where USEREMAIL='" + email + "'");
-            Rs1 = St1.executeQuery("Select USERID from root.USERTBL where USERPASSWORD='" + password + "'");
-            Rs.next();
-            Rs1.next();
-
-            emailuid = Rs.getInt("USERID");
-
-            passuid = Rs1.getInt("USERID");
-
-            if (emailuid == passuid) {
-
-                logeduserid = Rs.getInt("USERID");
-
-                St2 = (Statement) Con.createStatement();
-                Rs2 = St2.executeQuery("Select * from root.USERTBL where USERID=" + logeduserid);
-                Rs2.next();
-                LogedUserRoll = Rs2.getString("USERROLL");
-                logUserName = Rs2.getString("USERNAME");
-                isuserlogged = true;
-
-            } else {
-                isuserlogged = false;
-                LogedUserRoll = "";
-                logeduserid = 0;
-            }
-        } catch (Exception Ex) {
-            Ex.printStackTrace();
-        }
-        return isuserlogged;
-    }
-
-    //logout
-    public void logout() {
-
-        isuserlogged = false;
-        LogedUserRoll = "";
-        logeduserid = 0;
-        emailuid = 0;
-        passuid = 0;
-    }
-    
+ 
     
 
     public static void main(String[] args) {

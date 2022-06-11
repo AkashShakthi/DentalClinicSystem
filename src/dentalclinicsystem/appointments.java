@@ -20,8 +20,8 @@ public class appointments extends javax.swing.JFrame {
         Clear();
 
         //display logedusername
-        user User = new user();
-        usernameDisplay.setText(User.LoggerName());
+        Login login = new Login();
+        usernameDisplay.setText(login.LoggerName());
 
     }
 
@@ -348,8 +348,8 @@ public class appointments extends javax.swing.JFrame {
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         // TODO add your handling code here:
-        user User = new user();
-        User.logout();
+          Login login = new Login();
+        login.logout();
 
         this.dispose();
         new Login().setVisible(true);
@@ -421,10 +421,10 @@ public class appointments extends javax.swing.JFrame {
 
                 DisplayAppointment();
 
-                //send email to the patient
-                mailcontrol m = new mailcontrol();
-                m.storemaildata(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
-                m.email();
+                //send emailSender to the patient
+                emailcontroler m = new emailcontroler();
+                m.getAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
+                m.emailSender();
 
                 //clear text data
                 Clear();
@@ -452,10 +452,10 @@ public class appointments extends javax.swing.JFrame {
 
                 DisplayAppointment();
 
-                //send email to the patient
-                mailcontrol m = new mailcontrol();
-                m.storemaildata(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
-                m.email();
+                //send emailSender to the patient
+                emailcontroler m = new emailcontroler();
+                m.getAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
+                m.emailSender();
 
                 //clear text data
                 Clear();

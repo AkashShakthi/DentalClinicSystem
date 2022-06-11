@@ -18,8 +18,8 @@ public class splash extends javax.swing.JFrame {
      */
     public splash() {
         initComponents();
-        user User = new user();
-        User.logout();
+        Login login = new Login();
+        login.logout();
     }
 
     /**

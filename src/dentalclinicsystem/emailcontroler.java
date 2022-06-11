@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dentalclinicsystem;
 
 /**
@@ -19,15 +15,14 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
 import javax.swing.JOptionPane;
-//import javax.swing.JOptionPane;
 
 
-public class mailcontrol extends javax.swing.JFrame{
+public class emailcontroler extends javax.swing.JFrame{
     
     String from, to, host, sub,content;
     
     
-    public void email(){
+    public void emailSender(){
         
         from = "dentalclinic.official@gmail.com";
         host = "localhost";
@@ -85,7 +80,7 @@ ResultSet Rs = null, Rs1 = null;
    
 
     
- public  void storemaildata(String name, String treat, String date, String time){
+ public  void getAppointmentMailData(String name, String treat, String date, String time){
         
      try{
          Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
@@ -105,6 +100,8 @@ ResultSet Rs = null, Rs1 = null;
          this.sub = "Hello " +reciverName+" This is your Dental Clinic Appointment Details. ";
          this.content = "Your "+treat+" Appintment Date is : "+appointDate+" and Time is : "+appointTime+". The Treatment Payment is: Rs."+treatcost+".00 /=  Thank you. "; 
         
+         
+          
      }catch(Exception Ex){
               Ex.printStackTrace(); 
             }

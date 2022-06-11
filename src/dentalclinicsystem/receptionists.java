@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dentalclinicsystem;
 
 import javax.swing.table.DefaultTableModel;
@@ -12,26 +8,28 @@ import net.proteanit.sql.DbUtils;
  *
  * @author akash
  */
-public class receptionist extends javax.swing.JFrame {
+public class receptionists extends user {
 
     //for selected row key in table
     int Key = 0;
 
-    /**
-     * Creates new form receptionist
-     */
-    public receptionist() {
+
+    public receptionists() {
         initComponents();
 
-        //get this claa from user classs and create user count function for user counting perpuses
-        user User = new user();
-        User.UserIdGenerator();
+        //get this method from user classs and create user count function for user counting perpuses
+        UserIdGenerator();
+        
+       
+        
 
         //for display data on table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayUserData(UserRolll.getSelectedItem().toString())));
 
+       
         //display logedusername
-        usernameDisplay.setText(User.LoggerName());
+          Login login = new Login();
+        usernameDisplay.setText(login.LoggerName());
 
     }
 
@@ -446,15 +444,15 @@ public class receptionist extends javax.swing.JFrame {
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         // TODO add your handling code here:
-        user User = new user();
-        User.logout();
+           Login login = new Login();
+        login.logout();
 
         this.dispose();
         new Login().setVisible(true);
     }//GEN-LAST:event_logoutMouseClicked
 
     private void docotorslabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docotorslabelMouseClicked
-        new doctors().setVisible(true);
+        new Doctors().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_docotorslabelMouseClicked
 
@@ -470,37 +468,32 @@ public class receptionist extends javax.swing.JFrame {
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
 
-        //Delete user object
-        user User = new user();
+        
         // delete user
-        User.deleteuser(Key);
+        deleteuser(Key);
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayUserData(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_deleteMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        // TODO add your handling code here:
-
-        //create user object
-        user User = new user();
-        // save new user
-        User.edituser(Key, RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
+        
+        // editt  user
+        edituser(Key, RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayUserData(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_editMouseClicked
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
 
-        //create user object
-        user User = new user();
+        
         // save new user
-        User.createuser(RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
+        createuser(RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayUserData(UserRolll.getSelectedItem().toString())));
         //cleat text field
         Clear();
     }//GEN-LAST:event_saveMouseClicked
@@ -510,7 +503,7 @@ public class receptionist extends javax.swing.JFrame {
     }//GEN-LAST:event_RepMobileActionPerformed
 
     private void UserRolllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserRolllActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_UserRolllActionPerformed
 
     private void RepEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepEmailActionPerformed
@@ -526,22 +519,18 @@ public class receptionist extends javax.swing.JFrame {
     }//GEN-LAST:event_clearMouseClicked
 
     private void closeeyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeeyeMouseClicked
-        // TODO add your handling code here:
 
         RepPass.setEchoChar('*');
         RepConPass.setEchoChar('*');
     }//GEN-LAST:event_closeeyeMouseClicked
 
     private void openeyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openeyeMouseClicked
-        // TODO add your handling code here:
-
+       
         RepPass.setEchoChar((char) 0);
         RepConPass.setEchoChar((char) 0);
     }//GEN-LAST:event_openeyeMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -556,20 +545,21 @@ public class receptionist extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(receptionist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(receptionists.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(receptionist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(receptionists.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(receptionist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(receptionists.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(receptionist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(receptionists.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new receptionist().setVisible(true);
+                new receptionists().setVisible(true);
             }
         });
     }
