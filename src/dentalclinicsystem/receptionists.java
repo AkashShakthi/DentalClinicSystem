@@ -24,7 +24,7 @@ public class receptionists extends user {
         
 
         //for display data on table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayUserData(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
 
        
         //display logedusername
@@ -452,7 +452,7 @@ public class receptionists extends user {
     }//GEN-LAST:event_logoutMouseClicked
 
     private void docotorslabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_docotorslabelMouseClicked
-        new Doctors().setVisible(true);
+        new doctors().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_docotorslabelMouseClicked
 
@@ -472,7 +472,7 @@ public class receptionists extends user {
         // delete user
         deleteuser(Key);
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayUserData(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_deleteMouseClicked
@@ -482,7 +482,7 @@ public class receptionists extends user {
         // editt  user
         edituser(Key, RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayUserData(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_editMouseClicked
@@ -493,7 +493,7 @@ public class receptionists extends user {
         // save new user
         createuser(RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayUserData(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //cleat text field
         Clear();
     }//GEN-LAST:event_saveMouseClicked

@@ -24,14 +24,16 @@ public class patient extends javax.swing.JFrame {
         
          
        //display logedusername
+
         Login login = new Login();
        usernameDisplay.setText(login.LoggerName());
+
     }
     
+
 Connection Con = null;
 Statement St = null , St1 = null;
 ResultSet Rs = null, Rs1 = null;
-
 
 // addpatient
     boolean Patname;

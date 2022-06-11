@@ -116,7 +116,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         }
 
-        
+      
         usernameDisplay.setText(log.LoggerName());
 
     }
@@ -378,7 +378,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void doctorlabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_doctorlabelMouseClicked
         // TODO add your handling code here:
-        new Doctors().setVisible(true);
+        new doctors().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_doctorlabelMouseClicked
 

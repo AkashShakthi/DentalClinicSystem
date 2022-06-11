@@ -34,7 +34,7 @@ public class user extends javax.swing.JFrame {
     String conPassword;
     String userRoll;
     String userMobile;
-    
+ 
         // for counting users and get next user id
     public void UserIdGenerator() {
         try {
@@ -49,7 +49,7 @@ public class user extends javax.swing.JFrame {
         }
     }
 
-    
+
     // class for create new user
     public void createuser(String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
 
@@ -93,7 +93,7 @@ public class user extends javax.swing.JFrame {
 
     }
 
-    
+
     // class for edit user
     public void edituser(int Key, String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
 
@@ -143,7 +143,6 @@ public class user extends javax.swing.JFrame {
     }
 
 
-    
     public void deleteuser(int Key) {
 
         if (Key == 0) {
@@ -163,9 +162,8 @@ public class user extends javax.swing.JFrame {
         }
     }
 
-    
     // class for display user data on table
-    public ResultSet displayUserData(String UserRoll) {
+    public ResultSet displayuser(String UserRoll) {
 
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
@@ -178,7 +176,7 @@ public class user extends javax.swing.JFrame {
         return Rs;
     }
 
-    
+
      //password encrpted
     static String text;
     public String PasswordEncryptor(String text) {
@@ -235,8 +233,7 @@ public class user extends javax.swing.JFrame {
 
     }
 
-    
- 
+
     
 
     public static void main(String[] args) {

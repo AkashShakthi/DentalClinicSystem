@@ -267,7 +267,9 @@ public class Login extends user  {
         
         if(mail.getText().isEmpty() || pass.getText().isEmpty() ){
              JOptionPane.showMessageDialog(this, "Enter Username and Password");
+
         }else if(loginValidator(mail.getText(), pass.getText()) == true ){
+
             
          new Dashboard().setVisible(true);
             this.dispose();

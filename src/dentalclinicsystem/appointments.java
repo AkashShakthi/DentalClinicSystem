@@ -20,8 +20,10 @@ public class appointments extends javax.swing.JFrame {
         Clear();
 
         //display logedusername
+
         Login login = new Login();
         usernameDisplay.setText(login.LoggerName());
+
 
     }
 
@@ -445,7 +447,7 @@ public class appointments extends javax.swing.JFrame {
             try {
 
                 Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                String Query = "Update Root.AppointmentTbl set AppDate='" + AppDate.getDate().toString() + "'" + ",  PATIENT='" + PatName.getSelectedItem().toString() + "'" + " ,  APPTIME='" + AppTime.toString() + "'" + " ,  TREATMENT='" + TreatName.getSelectedItem().toString() + "'" + "  where APPID=" + Key;
+                String Query = "Update Root.AppointmentTbl set AppDate='" + AppDate.getDate().toString() + "'" + ",  PATIENT='" + PatName.getSelectedItem().toString() + "'" + " ,  APPTIME='" + AppTime.getText() + "'" + " ,  TREATMENT='" + TreatName.getSelectedItem().toString() + "'" + "  where APPID=" + Key;
                 Statement Add = Con.createStatement();
                 Add.executeUpdate(Query);
                 JOptionPane.showMessageDialog(this, "Appointment Updated Successfully");

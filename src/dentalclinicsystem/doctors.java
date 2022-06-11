@@ -13,7 +13,7 @@ import net.proteanit.sql.DbUtils;
  *
  * @author akash
  */
-public class doctors extends javax.swing.JFrame {
+public class doctors extends user {
 
     //for selected row key in table
     int Key = 0;
@@ -28,17 +28,17 @@ public class doctors extends javax.swing.JFrame {
         initComponents();
         
        //get this claa from user classs and create user count function for user counting perpuses
-       user User = new user();
-       User.UserIdGenerator();
+       UserIdGenerator();
       
        
        //for display data on table
-       DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
+       DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         
        
-       //username display
-       usernameDisplay.setText(User.LoggerName());
-     
+        //display logedusername
+        Login login = new Login();
+        usernameDisplay.setText(login.LoggerName());
+
     }
     
    //clear text field data
@@ -449,12 +449,11 @@ public class doctors extends javax.swing.JFrame {
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
         
-        //create user object
-        user User = new user();
+      
         // save new user 
-        User.createuser( DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
+        createuser( DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
         //update table
-        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
+        DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //cleat text field
         Clear();
     }//GEN-LAST:event_saveMouseClicked
@@ -482,26 +481,22 @@ public class doctors extends javax.swing.JFrame {
     }//GEN-LAST:event_DocMobileActionPerformed
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        // TODO add your handling code here:
-        
-         //create user object
-        user User = new user();
+       
         // save new user 
-        User.edituser( Key, DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
+        edituser( Key, DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
         //update table
-        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
+        DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_editMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
         
-        //Delete user object
-        user User = new user();
-        // delete user 
-        User.deleteuser( Key);
+        //Delete user
+      
+        deleteuser( Key);
         //update table
-        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
+        DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_deleteMouseClicked
@@ -511,14 +506,14 @@ public class doctors extends javax.swing.JFrame {
     }//GEN-LAST:event_clearMouseClicked
 
     private void receptionistslabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receptionistslabelMouseClicked
-        new receptionist().setVisible(true);
+        new receptionists().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_receptionistslabelMouseClicked
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         // TODO add your handling code here:
-        user User = new user();
-        User.logout();
+        Login login = new Login();
+        login.logout();
 
         this.dispose();
         new Login().setVisible(true);

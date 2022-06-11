@@ -9,16 +9,14 @@ package dentalclinicsystem;
  *
  * @author akash
  */
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
-public class DentalClinicSystem {   
+public class PaswordEncryprion {
+
+    public static void main(String args[]) {
+      
+  }
     
 
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-           
-
-    }
-    
 }
-
