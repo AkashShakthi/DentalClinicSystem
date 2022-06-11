@@ -29,15 +29,15 @@ public class doctors extends javax.swing.JFrame {
         
        //get this claa from user classs and create user count function for user counting perpuses
        user User = new user();
-       User.userCount();
+       User.UserIdGenerator();
       
        
        //for display data on table
-       DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
+       DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
         
        
        //username display
-       usernameDisplay.setText(User.username());
+       usernameDisplay.setText(User.LoggerName());
      
     }
     
@@ -405,10 +405,11 @@ public class doctors extends javax.swing.JFrame {
                     .addComponent(jLabel21)
                     .addComponent(jLabel22))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(UserRolll, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DocMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(docConPass, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(docConPass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(UserRolll, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DocMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(edit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -453,7 +454,7 @@ public class doctors extends javax.swing.JFrame {
         // save new user 
         User.createuser( DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
         //update table
-        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
+        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
         //cleat text field
         Clear();
     }//GEN-LAST:event_saveMouseClicked
@@ -488,7 +489,7 @@ public class doctors extends javax.swing.JFrame {
         // save new user 
         User.edituser( Key, DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
         //update table
-        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
+        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_editMouseClicked
@@ -500,7 +501,7 @@ public class doctors extends javax.swing.JFrame {
         // delete user 
         User.deleteuser( Key);
         //update table
-        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
+        DoctorTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_deleteMouseClicked

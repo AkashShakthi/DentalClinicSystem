@@ -29,19 +29,15 @@ public class patient extends javax.swing.JFrame {
         initComponents();
         DisplayPatient();
         PatCount();
-        controler();
+        
          
        //display logedusername
         user User = new user();
-       usernameDisplay.setText(User.username());
+       usernameDisplay.setText(User.LoggerName());
     }
     
     
-    public void controler(){
     
-     
-    
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

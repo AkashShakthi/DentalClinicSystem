@@ -25,13 +25,13 @@ public class receptionist extends javax.swing.JFrame {
 
         //get this claa from user classs and create user count function for user counting perpuses
         user User = new user();
-        User.userCount();
+        User.UserIdGenerator();
 
         //for display data on table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
 
         //display logedusername
-        usernameDisplay.setText(User.username());
+        usernameDisplay.setText(User.LoggerName());
 
     }
 
@@ -322,7 +322,7 @@ public class receptionist extends javax.swing.JFrame {
                                         .addGap(44, 44, 44)
                                         .addComponent(jLabel22))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
+                                        .addGap(48, 48, 48)
                                         .addComponent(jLabel16)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -379,9 +379,9 @@ public class receptionist extends javax.swing.JFrame {
                     .addComponent(jLabel12)
                     .addComponent(jLabel1)
                     .addComponent(usernameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -395,11 +395,12 @@ public class receptionist extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(RepEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(45, 45, 45))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(RepName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(jLabel22)
@@ -474,7 +475,7 @@ public class receptionist extends javax.swing.JFrame {
         // delete user
         User.deleteuser(Key);
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_deleteMouseClicked
@@ -487,7 +488,7 @@ public class receptionist extends javax.swing.JFrame {
         // save new user
         User.edituser(Key, RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_editMouseClicked
@@ -499,7 +500,7 @@ public class receptionist extends javax.swing.JFrame {
         // save new user
         User.createuser(RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayuser(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(User.displayUserData(UserRolll.getSelectedItem().toString())));
         //cleat text field
         Clear();
     }//GEN-LAST:event_saveMouseClicked

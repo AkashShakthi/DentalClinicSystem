@@ -116,7 +116,7 @@ public class Dashboard extends javax.swing.JFrame {
         }
 
         user User = new user();
-        usernameDisplay.setText(User.username());
+        usernameDisplay.setText(User.LoggerName());
 
     }
 

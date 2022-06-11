@@ -41,17 +41,15 @@ public class user extends javax.swing.JFrame {
     static String LogedUserRoll = "", logUserName = "";
     static int logeduserid = 0, emailuid = 0, passuid = 0;
 
-    //userroll controll
-    //static  boolean admin=false, doctor=false,receptionist=false;
-    //username display
-    public String username() {
+   //This LoggerName function for 
+    public String LoggerName() {
         String[] userfirstname = logUserName.split("\\ ");
         userfirstname[0] = userfirstname[0].substring(0, 1).toUpperCase() + userfirstname[0].substring(1);
         return userfirstname[0];
     }
 
     // for counting users and get next user id
-    public void userCount() {
+    public void UserIdGenerator() {
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
             St1 = Con.createStatement();
@@ -65,7 +63,9 @@ public class user extends javax.swing.JFrame {
     }
 
     //password encrpted
-    public String ecryptdtext(String text) {
+    static String text;
+    public String PasswordEncryptor(String text) {
+        this.text = text;
         String passwordToHash = text;
         String generatedPassword = null;
 
@@ -94,13 +94,15 @@ public class user extends javax.swing.JFrame {
 
     }
 
+    
+    
 // class for create new user
     public void createuser(String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
 
         this.Name = Name;
         this.email = email;
-        this.password = ecryptdtext(pass);
-        this.conPassword = ecryptdtext(conPass);
+        this.password = PasswordEncryptor(pass);
+        this.conPassword = PasswordEncryptor(conPass);
         this.userRoll = userRoll;
         this.userMobile = userMobile;
 
@@ -113,7 +115,7 @@ public class user extends javax.swing.JFrame {
         } else {
 
             try {
-                userCount();
+                UserIdGenerator();
 
                 Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
                 PreparedStatement add = Con.prepareStatement("insert into UserTbl values(?,?,?,?,?,?)");
@@ -137,13 +139,15 @@ public class user extends javax.swing.JFrame {
 
     }
 
+    
+    
     // class for edit user
     public void edituser(int Key, String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
 
         this.Name = Name;
         this.email = email;
-        this.password = ecryptdtext(pass);
-        this.conPassword = ecryptdtext(conPass);
+        this.password = PasswordEncryptor(pass);
+        this.conPassword = PasswordEncryptor(conPass);
         this.userRoll = userRoll;
         this.userMobile = userMobile;
 
@@ -185,6 +189,8 @@ public class user extends javax.swing.JFrame {
 
     }
 
+    
+    
     public void deleteuser(int Key) {
 
         if (Key == 0) {
@@ -204,8 +210,9 @@ public class user extends javax.swing.JFrame {
         }
     }
 
+    
     // class for display user data on table
-    public ResultSet displayuser(String UserRoll) {
+    public ResultSet displayUserData(String UserRoll) {
 
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
@@ -218,6 +225,8 @@ public class user extends javax.swing.JFrame {
         return Rs;
     }
 
+    
+    
     //chek user exist
     public boolean checkuserexist(String email) {
         this.email = email;
@@ -239,10 +248,12 @@ public class user extends javax.swing.JFrame {
 
     }
 
+    
+    
     //check login user
-    public boolean checkloginuser(String email, String pass) {
+    public boolean loginValidator(String email, String pass) {
         this.email = email;
-        this.password = ecryptdtext(pass);
+        this.password = PasswordEncryptor(pass);
 
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
@@ -289,6 +300,8 @@ public class user extends javax.swing.JFrame {
         emailuid = 0;
         passuid = 0;
     }
+    
+    
 
     public static void main(String[] args) {
 

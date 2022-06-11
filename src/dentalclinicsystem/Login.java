@@ -192,7 +192,7 @@ public class Login extends javax.swing.JFrame {
         
         if(email.getText().isEmpty() || password.getText().isEmpty() ){
              JOptionPane.showMessageDialog(this, "Enter Username and Password");
-        }else if(User.checkloginuser(email.getText(), password.getText()) == true ){
+        }else if(User.loginValidator(email.getText(), password.getText()) == true ){
             
          new Dashboard().setVisible(true);
             this.dispose();

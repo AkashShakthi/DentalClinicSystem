@@ -22,7 +22,7 @@ public class treatment extends javax.swing.JFrame {
 
         //display logedusername
         user User = new user();
-        usernameDisplay.setText(User.username());
+        usernameDisplay.setText(User.LoggerName());
     }
 
     @SuppressWarnings("unchecked")
