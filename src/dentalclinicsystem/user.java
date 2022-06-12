@@ -40,7 +40,7 @@ public class user extends javax.swing.JFrame {
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
             St1 = Con.createStatement();
-            Rs1 = St1.executeQuery("select Max(" + idColumnName + ") from Root." + Tablename);
+            Rs1 = St1.executeQuery("select Max("+idColumnName+") from Root."+Tablename);
             Rs1.next();
             id = Rs1.getInt(1) + 1;
 
