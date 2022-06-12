@@ -13,16 +13,87 @@ import net.proteanit.sql.DbUtils;
  *
  * @author akash
  */
-public class treatment extends javax.swing.JFrame {
+public class treatment extends user {
 
     public treatment() {
         initComponents();
-        TreatCount();
+
+        IdGenerator("TREATMENTId", "TREATMENTTbl");
+
         DisplayTreatment();
 
         //display logedusername
         Login login = new Login();
         usernameDisplay.setText(login.LoggerName());
+    }
+
+    private void AddTreatment() {
+        if (TreatName.getText().isEmpty() || TreatCost.getText().isEmpty() || TreatMed.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Missing Information");
+        } else {
+            try {
+                // int PatKey = 1;
+                IdGenerator("TREATMENTId", "TREATMENTTbl");
+
+                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                PreparedStatement add = Con.prepareStatement("insert into TreatmentTbl values(?,?,?,?)");
+                add.setInt(1, id);
+                add.setString(2, TreatName.getText());
+                add.setInt(3, Integer.valueOf(TreatCost.getText()));
+                add.setString(4, TreatMed.getText());
+
+                int row = add.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, "Patient Added Successfully");
+                Con.close();
+                DisplayTreatment();
+                Clear();
+            } catch (Exception Ex) {
+                Ex.printStackTrace();
+            }
+        }
+    }
+
+    private void EditTreatment() {
+        if (Key == 1000) {
+            JOptionPane.showMessageDialog(this, "Select The Treatment");
+        } else {
+            try {
+
+                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                String Query = "Update Root.TreatmentTbl set TREATMENTNAME='" + TreatName.getText() + "'" + ", TREATMENTCOST=" + TreatCost.getText() + "" + ", TREATMENTMED='" + TreatMed.getText() + "'" + "  where TREATMENTID=" + Key;
+                Statement Add = Con.createStatement();
+                Add.executeUpdate(Query);
+                JOptionPane.showMessageDialog(this, "Treatment Updated Successfully");
+
+                DisplayTreatment();
+                Clear();
+
+            } catch (Exception Ex) {
+                Ex.printStackTrace();
+            }
+        }
+
+    }
+
+    private void DisplayTreatment() {
+
+        try {
+            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            St = (Statement) Con.createStatement();
+            Rs = St.executeQuery("Select * from root.TreatmentTbl ");
+            TreatmentTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch (Exception Ex) {
+
+        }
+    }
+
+    private void Clear() {
+        TreatName.setText("");
+        TreatCost.setText("");
+        TreatMed.setText("");
+        Key = 1000;
+
     }
 
     @SuppressWarnings("unchecked")
@@ -344,73 +415,13 @@ public class treatment extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TreatMedActionPerformed
 
-    private void Clear() {
-        TreatName.setText("");
-        TreatCost.setText("");
-        TreatMed.setText("");
-        Key = 1000;
-
-    }
     private void clearMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearMouseClicked
         Clear();
     }//GEN-LAST:event_clearMouseClicked
 
-    Connection Con = null;
-    Statement St = null, St1 = null;
-    ResultSet Rs = null, Rs1 = null;
-
-    private void DisplayTreatment() {
-
-        try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-            St = (Statement) Con.createStatement();
-            Rs = St.executeQuery("Select * from root.TreatmentTbl ");
-            TreatmentTable.setModel(DbUtils.resultSetToTableModel(Rs));
-        } catch (Exception Ex) {
-
-        }
-    }
-
-    int TreatId = 0;
-
-    private void TreatCount() {
-        try {
-            St1 = Con.createStatement();
-            Rs1 = St1.executeQuery("select Max(TreatmentId) from root.TreatmentTbl");
-            Rs1.next();
-            TreatId = Rs1.getInt(1) + 1;
-
-        } catch (Exception Ex) {
-            Ex.printStackTrace();
-        }
-    }
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        // TODO add your handling code here:gfghfgfgfgfgfgfgdsfgdfgdfgdfdsf
-        if (TreatName.getText().isEmpty() || TreatCost.getText().isEmpty() || TreatMed.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Missing Information");
-        } else {
-            try {
-                // int PatKey = 1;
-                TreatCount();
-
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                PreparedStatement add = Con.prepareStatement("insert into TreatmentTbl values(?,?,?,?)");
-                add.setInt(1, TreatId);
-                add.setString(2, TreatName.getText());
-                add.setInt(3, Integer.valueOf(TreatCost.getText()));
-                add.setString(4, TreatMed.getText());
-
-                int row = add.executeUpdate();
-
-                JOptionPane.showMessageDialog(this, "Patient Added Successfully");
-                Con.close();
-                DisplayTreatment();
-                Clear();
-            } catch (Exception Ex) {
-                Ex.printStackTrace();
-            }
-        }
+        AddTreatment();
 
     }//GEN-LAST:event_saveMouseClicked
 
@@ -436,23 +447,9 @@ public class treatment extends javax.swing.JFrame {
     }//GEN-LAST:event_TreatmentTableMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        if (Key == 1000) {
-            JOptionPane.showMessageDialog(this, "Select The Treatment");
-        } else {
-            try {
 
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                String Query = "Delete from Root.TreatmentTbl where TreatmentId=" + Key;
-                Statement Add = Con.createStatement();
-                Add.executeUpdate(Query);
-                JOptionPane.showMessageDialog(this, " Treatment Deleted Successfully");
-
-                DisplayTreatment();
-                Clear();
-            } catch (Exception Ex) {
-                Ex.printStackTrace();
-            }
-        }
+        deleteuser(Key, "TreatmentId", "TreatmentTbl");
+        DisplayTreatment();
     }//GEN-LAST:event_deleteMouseClicked
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
@@ -460,25 +457,7 @@ public class treatment extends javax.swing.JFrame {
     }//GEN-LAST:event_saveActionPerformed
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        // TODO add your handling code here:
-        if (Key == 1000) {
-            JOptionPane.showMessageDialog(this, "Select The Treatment");
-        } else {
-            try {
-
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                String Query = "Update Root.TreatmentTbl set TREATMENTNAME='" + TreatName.getText() + "'" + ", TREATMENTCOST=" + TreatCost.getText() + "" + ", TREATMENTMED='" + TreatMed.getText() + "'" + "  where TREATMENTID=" + Key;
-                Statement Add = Con.createStatement();
-                Add.executeUpdate(Query);
-                JOptionPane.showMessageDialog(this, "Treatment Updated Successfully");
-
-                DisplayTreatment();
-                Clear();
-
-            } catch (Exception Ex) {
-                Ex.printStackTrace();
-            }
-        }
+        EditTreatment();
     }//GEN-LAST:event_editMouseClicked
 
     private void editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editActionPerformed
@@ -487,8 +466,8 @@ public class treatment extends javax.swing.JFrame {
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         // TODO add your handling code here:
-           Login login = new Login();
-          login.logout();
+        Login login = new Login();
+        login.logout();
 
         this.dispose();
         new Login().setVisible(true);

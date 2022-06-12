@@ -36,11 +36,11 @@ public class user extends javax.swing.JFrame {
     String userMobile;
  
         // for counting users and get next user id
-    public void UserIdGenerator() {
+    public void IdGenerator(String idColumnName, String Tablename ) {
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
             St1 = Con.createStatement();
-            Rs1 = St1.executeQuery("select Max(USERID) from Root.USERTBL");
+            Rs1 = St1.executeQuery("select Max(" + idColumnName + ") from Root." + Tablename);
             Rs1.next();
             id = Rs1.getInt(1) + 1;
 
@@ -64,13 +64,13 @@ public class user extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Missing Information");
         } else if (!password.equals(conPassword)) {
             JOptionPane.showMessageDialog(this, "Password Missmatch");
-        } else if (checkuserexist(email) == true) {
+        } else if (CheckDataAlradyExist(email,"USEREMAIL","USERTBL","USERID") != 0) {
             JOptionPane.showMessageDialog(this, "This email's user already exsist");
         } else {
 
             try {
-                UserIdGenerator();
-
+               IdGenerator("USERID","USERTBL");
+      
                 Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
                 PreparedStatement add = Con.prepareStatement("insert into UserTbl values(?,?,?,?,?,?)");
                 add.setInt(1, id);
@@ -106,12 +106,14 @@ public class user extends javax.swing.JFrame {
 
         if (Key == 0) {
             JOptionPane.showMessageDialog(this, "Select The user");
-        } else {
-            try {
-
+        } 
+        else if (CheckDataAlradyExist(email,"USEREMAIL","USERTBL","USERID") != 0  ) {
+             
+            if(CheckDataAlradyExist(email,"USEREMAIL","USERTBL","USERID") == Key){
+                 try {
                 Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
                 String Query;
-
+                
                 if (!Name.isEmpty()) {
                     Query = "Update Root.USERTBL set  USERNAME='" + Name + "'" + " where USERID=" + Key;
                     Statement Add = Con.createStatement();
@@ -138,23 +140,26 @@ public class user extends javax.swing.JFrame {
             } catch (Exception Ex) {
                 Ex.printStackTrace();
             }
+            }else{
+                JOptionPane.showMessageDialog(this, "This email's user already exsist");
+            }
         }
-
+      
     }
 
 
-    public void deleteuser(int Key) {
+    public void deleteuser(int Key, String ColumenNameOfID, String tableName) {
 
         if (Key == 0) {
-            JOptionPane.showMessageDialog(this, "Select The User");
+            JOptionPane.showMessageDialog(this, "Select First");
         } else {
             try {
 
                 Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                String Query = "Delete from Root.USERTBL where USERId=" + Key;
+                String Query = "Delete from Root."+tableName+" where "+ColumenNameOfID+"=" + Key;
                 Statement Add = Con.createStatement();
                 Add.executeUpdate(Query);
-                JOptionPane.showMessageDialog(this, "User Deleted Successfully");
+                JOptionPane.showMessageDialog(this, "Record Deleted Successfully");
 
             } catch (Exception Ex) {
                 Ex.printStackTrace();
@@ -212,24 +217,25 @@ public class user extends javax.swing.JFrame {
     
     
       //chek user Alradyexist
-    static boolean userexsist;
-    public boolean checkuserexist(String email) {
-        this.email = email;
+    static int userexsistID;
+    public int CheckDataAlradyExist(String value, String ColumnNameOfValue, String tableName,String tableID) {
+        this.email = value;
 
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
             St = (Statement) Con.createStatement();
-            Rs = St.executeQuery("Select * from root.USERTBL where USEREMAIL='" + email + "'");
+            Rs = St.executeQuery("Select * from root."+tableName+" where "+ColumnNameOfValue+"='" + value + "'");
 
             if (Rs.next()) {
-                userexsist = true;
+                
+                userexsistID = Rs.getInt(tableID);
             } else {
-                userexsist = false;
+                userexsistID = 0 ;
             }
         } catch (Exception Ex) {
 
         }
-        return userexsist;
+        return userexsistID;
 
     }
 

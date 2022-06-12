@@ -1,32 +1,24 @@
 package dentalclinicsystem;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
+public class Login extends user {
 
-public class Login extends user  {
-
-  
     public Login() {
         initComponents();
-        
-       
+
     }
 
-      
-
-   
-    
     //for login validation
     static boolean isuserlogged = false;
     static String LogedUserRoll = "", logUserName = "";
     static int logeduserid = 0, emailuid = 0, passuid = 0;
 
-   //This is for get first name of the LoggerName 
+    //This is for get first name of the LoggerName 
     public String LoggerName() {
         String[] userfirstname = logUserName.split("\\ ");
         userfirstname[0] = userfirstname[0].substring(0, 1).toUpperCase() + userfirstname[0].substring(1);
@@ -35,7 +27,7 @@ public class Login extends user  {
 
     //check login user
     public boolean loginValidator(String loggermail, String loggerpasword) {
-         
+
         email = loggermail;
         password = PasswordEncryptor(loggerpasword);
 
@@ -54,7 +46,7 @@ public class Login extends user  {
             passuid = Rs1.getInt("USERID");
 
             if (emailuid == passuid) {
-     
+
                 logeduserid = Rs.getInt("USERID");
 
                 St2 = (Statement) Con.createStatement();
@@ -84,25 +76,7 @@ public class Login extends user  {
         emailuid = 0;
         passuid = 0;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-  
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -258,23 +232,21 @@ public class Login extends user  {
     }// </editor-fold>//GEN-END:initComponents
 
     private void resetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resetMouseClicked
-       mail.setText("");
-       pass.setText("");
+        mail.setText("");
+        pass.setText("");
     }//GEN-LAST:event_resetMouseClicked
 
     private void loginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginMouseClicked
-       
-        
-        if(mail.getText().isEmpty() || pass.getText().isEmpty() ){
-             JOptionPane.showMessageDialog(this, "Enter Username and Password");
 
-        }else if(loginValidator(mail.getText(), pass.getText()) == true ){
+        if (mail.getText().isEmpty() || pass.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Enter Username and Password");
 
-            
-         new Dashboard().setVisible(true);
+        } else if (loginValidator(mail.getText(), pass.getText()) == true) {
+
+            new Dashboard().setVisible(true);
             this.dispose();
-        }else{
-           JOptionPane.showMessageDialog(this, "Username or password not Matched");
+        } else {
+            JOptionPane.showMessageDialog(this, "Username or password not Matched");
         }
     }//GEN-LAST:event_loginMouseClicked
 
@@ -283,9 +255,8 @@ public class Login extends user  {
         System.exit(1);
     }//GEN-LAST:event_closeMouseClicked
 
-
     public static void main(String args[]) {
-     
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Login().setVisible(true);

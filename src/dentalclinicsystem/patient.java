@@ -14,52 +14,29 @@ import net.proteanit.sql.DbUtils;
  *
  * @author akash
  */
-public class patient extends javax.swing.JFrame {
+public class patient extends user {
 
  
     public patient() {
         initComponents();
         DisplayPatient();
-        PatCount();
-        
+   
+        //generate id for new patient
+        IdGenerator("PatId","PatientTbl");
          
        //display logedusername
-
         Login login = new Login();
        usernameDisplay.setText(login.LoggerName());
 
     }
     
 
-Connection Con = null;
-Statement St = null , St1 = null;
-ResultSet Rs = null, Rs1 = null;
-
 // addpatient
-    boolean Patname;
  protected void addpatient(){
-   //chek patient name  is already exsit
-       
+           if (CheckDataAlradyExist(PatName.getText(),"PATNAME","PATIENTTBL","PATID") != 0) {
+            JOptionPane.showMessageDialog(this, "This Patient is already exsist");
         
-            try{
-         Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-         St = (Statement) Con.createStatement();
-         Rs = St.executeQuery("Select * from root.PATIENTTBL where PATNAME='"+PatName.getText()+"'");
-        
-         if(Rs.next()){
-          Patname = true;
-         }
-         else{ 
-          Patname =false;
-         }
-     }catch(Exception Ex){
-               
-            }
-            
-            //if  name not exists then store data
-        if(Patname == true){
-              JOptionPane.showMessageDialog(this, "Patient Name Already exsist");
-        }
+           }
         else{
         
         if(PatName.getText().isEmpty() || PatEmail.getText().isEmpty() ||PatAllergies.getText().isEmpty() ||PatMobile.getText().isEmpty() || PatAddress.getText().isEmpty()){
@@ -67,10 +44,10 @@ ResultSet Rs = null, Rs1 = null;
         }else{
             try{
                // int PatKey = 1;
-                PatCount();
+                IdGenerator("PatId","PatientTbl");
                 Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
                 PreparedStatement add = Con.prepareStatement("insert into PatientTbl values(?,?,?,?,?,?,?,?)");
-                add.setInt(1, PatId);
+                add.setInt(1, id);
                 add.setString(2, PatName.getText());
                 add.setString(3, PatMobile.getText());
                 add.setString(4, PatGender.getSelectedItem().toString() );
@@ -91,96 +68,42 @@ ResultSet Rs = null, Rs1 = null;
     }}
  
  } 
-
-  int PatId = 0;
-    protected void PatCount(){
-    try{
-        St1 = Con.createStatement();
-        Rs1 = St1.executeQuery("select Max(PatId) from Root.PatientTbl");
-        Rs1.next();
-        PatId = Rs1.getInt(1)+1;
-       
-    }
-    catch(Exception Ex){
-        Ex.printStackTrace();
-    }
-    }
-    
    //edit patient
  protected void editpatient(){
-   //chek patient name and email is already exsit in other ids
+   //chek patient name and email is already exsit in other ids   
+    
+    
+                            if(Key == 0){
+                                JOptionPane.showMessageDialog(this, "Select The Patient");
+                            }else if (CheckDataAlradyExist(PatName.getText(),"PATNAME","PATIENTTBL","PATID") != 0  ){
+                             
+                                    if(CheckDataAlradyExist(PatName.getText(),"PATNAME","PATIENTTBL","PATID") == Key  ){
+                                                   try{
+
+                                    Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
+                                   String Query = "Update Root.PatientTbl set PatName='"+PatName.getText()+"'"+", PatMobile='"+PatMobile.getText()+"'"+", PatEmail='"+PatEmail.getText()+"'"+", PatGender='"+PatGender.getSelectedItem()+"'"+", PatAllergies='"+PatAllergies.getText()+"'"+", PatAddress='"+PatAddress.getText()+"'"+", PatDOB='"+PatDOB.getDate().toString()+"'"+" where PatID="+Key;
+                                   Statement Add = Con.createStatement();
+                                   Add.executeUpdate(Query);
+                                   JOptionPane.showMessageDialog(this, "Patient Updated Successfully");
+
+                                    DisplayPatient();
+                                       Clear();
+
+                                }catch(Exception Ex){
+                                    Ex.printStackTrace();
+                                }
+                                    }else{
+                                    
+                                                JOptionPane.showMessageDialog(this, "This  Patient's Name already exsist");
+                                    
+                                    }
+                                 
+                            
+                            }
        
-        
-          try{
-         Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-         St = (Statement) Con.createStatement();
-         Rs = St.executeQuery("Select * from root.PATIENTTBL where PATNAME='"+PatName.getText()+"'");
-        
-         if(Rs.next()){
-            
-             if(Key != Rs.getInt("PATID")){
-                
-                 Patname = true;
-             }else{
-                   Patname = false;      
-             }
-         }
-         else{ 
-          Patname =false;
-         }
          
          
-     }catch(Exception Ex){
-               
-            }
-            
-              //if patient  name not exists in other records then store data
-        if(Patname == true){
-              JOptionPane.showMessageDialog(this, "Patient Name Already exsist" );
-        }
-        else{
-        
-        if(Key == 0){
-            JOptionPane.showMessageDialog(this, "Select The Patient");
-        }else{
-            try{
-                
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-               String Query = "Update Root.PatientTbl set PatName='"+PatName.getText()+"'"+", PatMobile='"+PatMobile.getText()+"'"+", PatEmail='"+PatEmail.getText()+"'"+", PatGender='"+PatGender.getSelectedItem()+"'"+", PatAllergies='"+PatAllergies.getText()+"'"+", PatAddress='"+PatAddress.getText()+"'"+", PatDOB='"+PatDOB.getDate().toString()+"'"+" where PatID="+Key;
-               Statement Add = Con.createStatement();
-               Add.executeUpdate(Query);
-               JOptionPane.showMessageDialog(this, "Patient Updated Successfully");
-            
-                DisplayPatient();
-                   Clear();
-                  
-            }catch(Exception Ex){
-                Ex.printStackTrace();
-            }
-    }
-       }
- }
- 
- //delete patient
- protected void deletePatient(){
- 
-  if(Key == 0){
-            JOptionPane.showMessageDialog(this, "Select The Patient");
-        }else{
-            try{
-                
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-               String Query = "Delete from Root.PatientTbl where PatId="+Key;
-               Statement Add = Con.createStatement();
-               Add.executeUpdate(Query);
-               JOptionPane.showMessageDialog(this, "Patient Deleted Successfully");
-            
-                DisplayPatient();
-                     Clear();  
-            }catch(Exception Ex){
-                Ex.printStackTrace();
-            }
-    }
+
  }
  
  //display patient
@@ -668,7 +591,7 @@ ResultSet Rs = null, Rs1 = null;
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:ddddddddddddddddddddddddddddddddddd
-       deletePatient();
+         deleteuser(Key, "PATID", "PATIENTTBL");
     }//GEN-LAST:event_jButton3MouseClicked
 
    

@@ -5,7 +5,6 @@
  */
 package dentalclinicsystem;
 
-
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
@@ -21,34 +20,30 @@ public class doctors extends user {
     /**
      * Creates new form doctors
      */
-    
-    
-    
     public doctors() {
         initComponents();
-        
-       //get this claa from user classs and create user count function for user counting perpuses
-       UserIdGenerator();
-      
-       
-       //for display data on table
-       DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
-        
-       
+
+        //get this claa from user classs and create user count function for user counting perpuses
+        IdGenerator("USERID", "USERTBL");
+
+        //for display data on table
+        DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
+
         //display logedusername
         Login login = new Login();
         usernameDisplay.setText(login.LoggerName());
 
     }
-    
-   //clear text field data
- private void Clear(){
-     DocName.setText("");
-     DocEmail.setText("");
-     docPass.setText("");
-     docConPass.setText("");
-     DocMobile.setText("");   
+
+    //clear text field data
+    private void Clear() {
+        DocName.setText("");
+        DocEmail.setText("");
+        docPass.setText("");
+        docConPass.setText("");
+        DocMobile.setText("");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -448,10 +443,9 @@ public class doctors extends user {
     }//GEN-LAST:event_DocEmailActionPerformed
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        
-      
+
         // save new user 
-        createuser( DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
+        createuser(DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
         //update table
         DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //cleat text field
@@ -462,7 +456,7 @@ public class doctors extends user {
         // TODO add your handling code here:
     }//GEN-LAST:event_UserRolllActionPerformed
 
-   
+
     private void DoctorTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DoctorTableMouseClicked
 
         DefaultTableModel model = (DefaultTableModel) DoctorTable.getModel();
@@ -471,9 +465,8 @@ public class doctors extends user {
         DocName.setText(model.getValueAt(MyIndex, 1).toString());
         DocEmail.setText(model.getValueAt(MyIndex, 2).toString());
         DocMobile.setText(model.getValueAt(MyIndex, 3).toString());
-        
-       
-        
+
+
     }//GEN-LAST:event_DoctorTableMouseClicked
 
     private void DocMobileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocMobileActionPerformed
@@ -481,9 +474,9 @@ public class doctors extends user {
     }//GEN-LAST:event_DocMobileActionPerformed
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-       
+
         // save new user 
-        edituser( Key, DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
+        edituser(Key, DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
         //update table
         DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //clear text field
@@ -491,10 +484,9 @@ public class doctors extends user {
     }//GEN-LAST:event_editMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        
+
         //Delete user
-      
-        deleteuser( Key);
+        deleteuser(Key, "USERID", "USERTBL");
         //update table
         DoctorTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //clear text field
@@ -521,15 +513,15 @@ public class doctors extends user {
 
     private void dashboardlabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardlabelMouseClicked
         // TODO add your handling code here:
-         new Dashboard().setVisible(true);
+        new Dashboard().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_dashboardlabelMouseClicked
 
     private void openeyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openeyeMouseClicked
         // TODO add your handling code here:
 
-        docPass.setEchoChar((char)0);
-        docConPass.setEchoChar((char)0);
+        docPass.setEchoChar((char) 0);
+        docConPass.setEchoChar((char) 0);
     }//GEN-LAST:event_openeyeMouseClicked
 
     private void closeeyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeeyeMouseClicked
@@ -539,9 +531,6 @@ public class doctors extends user {
         docConPass.setEchoChar('*');
     }//GEN-LAST:event_closeeyeMouseClicked
 
-  
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -573,15 +562,9 @@ public class doctors extends user {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new doctors().setVisible(true);
-                
+
             }
         });
-        
-    
-   
-             
-                 
-       
 
     }
 

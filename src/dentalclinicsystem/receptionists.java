@@ -1,4 +1,3 @@
-
 package dentalclinicsystem;
 
 import javax.swing.table.DefaultTableModel;
@@ -13,22 +12,17 @@ public class receptionists extends user {
     //for selected row key in table
     int Key = 0;
 
-
     public receptionists() {
         initComponents();
 
         //get this method from user classs and create user count function for user counting perpuses
-        UserIdGenerator();
-        
-       
-        
+        IdGenerator("USERID", "USERTBL");
 
         //for display data on table
         ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
 
-       
         //display logedusername
-          Login login = new Login();
+        Login login = new Login();
         usernameDisplay.setText(login.LoggerName());
 
     }
@@ -444,7 +438,7 @@ public class receptionists extends user {
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         // TODO add your handling code here:
-           Login login = new Login();
+        Login login = new Login();
         login.logout();
 
         this.dispose();
@@ -468,9 +462,8 @@ public class receptionists extends user {
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
 
-        
         // delete user
-        deleteuser(Key);
+        deleteuser(Key, "USERID", "USERTBL");
         //update table
         ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
         //clear text field
@@ -478,7 +471,7 @@ public class receptionists extends user {
     }//GEN-LAST:event_deleteMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-        
+
         // editt  user
         edituser(Key, RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
@@ -489,7 +482,6 @@ public class receptionists extends user {
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
 
-        
         // save new user
         createuser(RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
@@ -503,7 +495,7 @@ public class receptionists extends user {
     }//GEN-LAST:event_RepMobileActionPerformed
 
     private void UserRolllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserRolllActionPerformed
-       
+
     }//GEN-LAST:event_UserRolllActionPerformed
 
     private void RepEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepEmailActionPerformed
@@ -525,12 +517,11 @@ public class receptionists extends user {
     }//GEN-LAST:event_closeeyeMouseClicked
 
     private void openeyeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openeyeMouseClicked
-       
+
         RepPass.setEchoChar((char) 0);
         RepConPass.setEchoChar((char) 0);
     }//GEN-LAST:event_openeyeMouseClicked
 
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

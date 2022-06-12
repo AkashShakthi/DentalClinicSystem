@@ -9,27 +9,144 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 
-public class appointments extends javax.swing.JFrame {
+public class appointments extends user {
 
     public appointments() {
         initComponents();
         getPatient();
         getTreatment();
-        AppointmentCount();
+
+        //  AppointmentCount();
+        IdGenerator("APPID", "APPOINTMENTTBL");
+
         DisplayAppointment();
         Clear();
 
         //display logedusername
-
         Login login = new Login();
         usernameDisplay.setText(login.LoggerName());
 
-
     }
 
-    Connection Con = null;
-    Statement St = null, St1 = null;
-    ResultSet Rs = null, Rs1 = null;
+    private void addAppointment() {
+        if (PatName.getSelectedIndex() == -1 || TreatName.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(this, "Missing Information");
+        } else {
+            try {
+
+                IdGenerator("APPID", "APPOINTMENTTBL");
+                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                PreparedStatement add = Con.prepareStatement("insert into APPOINTMENTTBL values(?,?,?,?,?)");
+                add.setInt(1, id);
+                add.setString(2, AppDate.getDate().toString());
+                add.setString(3, PatName.getSelectedItem().toString());
+                add.setString(4, AppTime.getText());
+                add.setString(5, TreatName.getSelectedItem().toString());
+
+                int row = add.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, "Appointment Added Successfully");
+                Con.close();
+
+                DisplayAppointment();
+
+                //send emailSender to the patient
+                emailcontroler m = new emailcontroler();
+                m.getAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
+                m.emailSender();
+
+                //clear text data
+                Clear();
+
+            } catch (Exception Ex) {
+                Ex.printStackTrace();
+            }
+
+        }
+    }
+
+    private void editAppointment() {
+        if (Key == 1000) {
+            JOptionPane.showMessageDialog(this, "Select The Appointment");
+        } else {
+            try {
+
+                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                String Query = "Update Root.AppointmentTbl set AppDate='" + AppDate.getDate().toString() + "'" + ",  PATIENT='" + PatName.getSelectedItem().toString() + "'" + " ,  APPTIME='" + AppTime.getText() + "'" + " ,  TREATMENT='" + TreatName.getSelectedItem().toString() + "'" + "  where APPID=" + Key;
+                Statement Add = Con.createStatement();
+                Add.executeUpdate(Query);
+                JOptionPane.showMessageDialog(this, "Appointment Updated Successfully");
+
+                DisplayAppointment();
+
+                //send emailSender to the patient
+                emailcontroler m = new emailcontroler();
+                m.getAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
+                m.emailSender();
+
+                //clear text data
+                Clear();
+
+            } catch (Exception Ex) {
+                Ex.printStackTrace();
+            }
+        }
+    }
+
+    private void DisplayAppointment() {
+
+        try {
+            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            St = (Statement) Con.createStatement();
+            Rs = St.executeQuery("Select * from root.APPOINTMENTTBL ");
+            AppointmentTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch (Exception Ex) {
+            Ex.printStackTrace();
+        }
+    }
+
+    private void getPatient() {
+
+        try {
+            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            St = (Statement) Con.createStatement();
+            String query = "Select * from root.PatientTbl ";
+            Rs = St.executeQuery(query);
+            while (Rs.next()) {
+                String MyPat = Rs.getString("PatName");
+                PatName.addItem(MyPat);
+            }
+
+        } catch (Exception Ex) {
+
+        }
+    }
+
+    private void getTreatment() {
+
+        try {
+            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            St = (Statement) Con.createStatement();
+            String query = "Select * from root.TreatmentTbl  ";
+            Rs = St.executeQuery(query);
+            while (Rs.next()) {
+                String MyTreat = Rs.getString("TreatmentName");
+                TreatName.addItem(MyTreat);
+            }
+
+        } catch (Exception Ex) {
+
+        }
+    }
+
+    private void Clear() {
+        PatName.setSelectedIndex(-1);
+        TreatName.setSelectedIndex(-1);
+        AppDate.setCalendar(null);
+        AppTime.setText("");
+        Key = 1000;
+    }
+    int Key = 1000;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -350,7 +467,7 @@ public class appointments extends javax.swing.JFrame {
 
     private void logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutMouseClicked
         // TODO add your handling code here:
-          Login login = new Login();
+        Login login = new Login();
         login.logout();
 
         this.dispose();
@@ -380,92 +497,19 @@ public class appointments extends javax.swing.JFrame {
     }//GEN-LAST:event_AppointmentTableMouseClicked
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
-        if (Key == 1000) {
-            JOptionPane.showMessageDialog(this, "Select The Appointment");
-        } else {
-            try {
 
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                String Query = "Delete from Root.AppointmentTbl where AppId=" + Key;
-                Statement Add = Con.createStatement();
-                Add.executeUpdate(Query);
-                JOptionPane.showMessageDialog(this, " Appointment Deleted Successfully");
-
-                DisplayAppointment();
-                Clear();
-            } catch (Exception Ex) {
-                Ex.printStackTrace();
-            }
-        }
-
+        deleteuser(Key, "AppId", "AppointmentTbl");
+        DisplayAppointment();
     }//GEN-LAST:event_deleteMouseClicked
+
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
         // TODO add your handling code here:
-        if (PatName.getSelectedIndex() == -1 || TreatName.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(this, "Missing Information");
-        } else {
-            try {
-                // int PatKey = 1;
-                AppointmentCount();
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                PreparedStatement add = Con.prepareStatement("insert into APPOINTMENTTBL values(?,?,?,?,?)");
-                add.setInt(1, AppId);
-                add.setString(2, AppDate.getDate().toString());
-                add.setString(3, PatName.getSelectedItem().toString());
-                add.setString(4, AppTime.getText());
-                add.setString(5, TreatName.getSelectedItem().toString());
-
-                int row = add.executeUpdate();
-
-                JOptionPane.showMessageDialog(this, "Appointment Added Successfully");
-                Con.close();
-
-                DisplayAppointment();
-
-                //send emailSender to the patient
-                emailcontroler m = new emailcontroler();
-                m.getAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
-                m.emailSender();
-
-                //clear text data
-                Clear();
-
-            } catch (Exception Ex) {
-                Ex.printStackTrace();
-            }
-
-        }
-
+        addAppointment();
     }//GEN-LAST:event_saveMouseClicked
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
-
-        if (Key == 1000) {
-            JOptionPane.showMessageDialog(this, "Select The Appointment");
-        } else {
-            try {
-
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                String Query = "Update Root.AppointmentTbl set AppDate='" + AppDate.getDate().toString() + "'" + ",  PATIENT='" + PatName.getSelectedItem().toString() + "'" + " ,  APPTIME='" + AppTime.getText() + "'" + " ,  TREATMENT='" + TreatName.getSelectedItem().toString() + "'" + "  where APPID=" + Key;
-                Statement Add = Con.createStatement();
-                Add.executeUpdate(Query);
-                JOptionPane.showMessageDialog(this, "Appointment Updated Successfully");
-
-                DisplayAppointment();
-
-                //send emailSender to the patient
-                emailcontroler m = new emailcontroler();
-                m.getAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
-                m.emailSender();
-
-                //clear text data
-                Clear();
-
-            } catch (Exception Ex) {
-                Ex.printStackTrace();
-            }
-        }
+        editAppointment();
 
     }//GEN-LAST:event_editMouseClicked
 
@@ -478,75 +522,6 @@ public class appointments extends javax.swing.JFrame {
         new Dashboard().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_dashboardlabelMouseClicked
-
-    private void getPatient() {
-
-        try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-            St = (Statement) Con.createStatement();
-            String query = "Select * from root.PatientTbl ";
-            Rs = St.executeQuery(query);
-            while (Rs.next()) {
-                String MyPat = Rs.getString("PatName");
-                PatName.addItem(MyPat);
-            }
-
-        } catch (Exception Ex) {
-
-        }
-    }
-
-    private void getTreatment() {
-
-        try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-            St = (Statement) Con.createStatement();
-            String query = "Select * from root.TreatmentTbl  ";
-            Rs = St.executeQuery(query);
-            while (Rs.next()) {
-                String MyTreat = Rs.getString("TreatmentName");
-                TreatName.addItem(MyTreat);
-            }
-
-        } catch (Exception Ex) {
-
-        }
-    }
-
-    int AppId = 0;
-
-    private void AppointmentCount() {
-        try {
-            St1 = Con.createStatement();
-            Rs1 = St1.executeQuery("select Max(AppId) from root.AppointmentTbl");
-            Rs1.next();
-            AppId = Rs1.getInt(1) + 1;
-
-        } catch (Exception Ex) {
-            Ex.printStackTrace();
-        }
-    }
-
-    private void DisplayAppointment() {
-
-        try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-            St = (Statement) Con.createStatement();
-            Rs = St.executeQuery("Select * from root.APPOINTMENTTBL ");
-            AppointmentTable.setModel(DbUtils.resultSetToTableModel(Rs));
-        } catch (Exception Ex) {
-            Ex.printStackTrace();
-        }
-    }
-
-    private void Clear() {
-        PatName.setSelectedIndex(-1);
-        TreatName.setSelectedIndex(-1);
-        AppDate.setCalendar(null);
-        AppTime.setText("");
-        Key = 1000;
-    }
-    int Key = 1000;
 
     /**
      * @param args the command line arguments
