@@ -601,6 +601,7 @@ public class patient extends user {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
       
         deleteData(Key, "PATID", "PATIENTTBL");
+        DisplayPatient();
     }//GEN-LAST:event_jButton3MouseClicked
 
 
