@@ -13,11 +13,10 @@ import net.proteanit.sql.DbUtils;
  * @author akash
  */
 public class doctors extends user {
-      
+
     //for selected row key in table
     int Key = 0;
 
-    
     public doctors() {
         initComponents();
 
@@ -42,7 +41,6 @@ public class doctors extends user {
         DocMobile.setText("");
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -429,25 +427,25 @@ public class doctors extends user {
     }// </editor-fold>//GEN-END:initComponents
 
     private void DocNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocNameActionPerformed
-       
+
     }//GEN-LAST:event_DocNameActionPerformed
 
     private void DocEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocEmailActionPerformed
-       
+
     }//GEN-LAST:event_DocEmailActionPerformed
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-       
+
         // save new user 
-     createData(DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
+        createData(DocName.getText(), DocEmail.getText(), docPass.getText(), docConPass.getText(), UserRolll.getSelectedItem().toString(), DocMobile.getText());
         //update table
-      DoctorTable.setModel(DbUtils.resultSetToTableModel(displayData(UserRolll.getSelectedItem().toString())));
+        DoctorTable.setModel(DbUtils.resultSetToTableModel(displayData(UserRolll.getSelectedItem().toString())));
         //cleat text field
-       Clear();
+        Clear();
     }//GEN-LAST:event_saveMouseClicked
 
     private void UserRolllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UserRolllActionPerformed
-        
+
     }//GEN-LAST:event_UserRolllActionPerformed
 
 
@@ -464,7 +462,7 @@ public class doctors extends user {
     }//GEN-LAST:event_DoctorTableMouseClicked
 
     private void DocMobileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DocMobileActionPerformed
-      
+
     }//GEN-LAST:event_DocMobileActionPerformed
 
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
@@ -525,10 +523,8 @@ public class doctors extends user {
         docConPass.setEchoChar('*');
     }//GEN-LAST:event_closeeyeMouseClicked
 
-   
-    
     public static void main(String args[]) {
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new doctors().setVisible(true);

@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -29,16 +30,20 @@ public class appointments extends user {
     }
 
     private void addAppointment() {
+        
+        SimpleDateFormat simpledate = new SimpleDateFormat("yyy-MM-dd");
+        
         if (PatName.getSelectedIndex() == -1 || TreatName.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Missing Information");
         } else {
             try {
 
                 IdGenerator("APPID", "APPOINTMENTTBL");
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
                 PreparedStatement add = Con.prepareStatement("insert into APPOINTMENTTBL values(?,?,?,?,?)");
                 add.setInt(1, id);
-                add.setString(2, AppDate.getDate().toString());
+                add.setString(2,simpledate.format(AppDate.getDate()));
                 add.setString(3, PatName.getSelectedItem().toString());
                 add.setString(4, AppTime.getText());
                 add.setString(5, TreatName.getSelectedItem().toString());
@@ -70,9 +75,11 @@ public class appointments extends user {
             JOptionPane.showMessageDialog(this, "Select The Appointment");
         } else {
             try {
+                SimpleDateFormat simpledate = new SimpleDateFormat("yyy-MM-dd");
 
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                String Query = "Update Root.AppointmentTbl set AppDate='" + AppDate.getDate().toString() + "'" + ",  PATIENT='" + PatName.getSelectedItem().toString() + "'" + " ,  APPTIME='" + AppTime.getText() + "'" + " ,  TREATMENT='" + TreatName.getSelectedItem().toString() + "'" + "  where APPID=" + Key;
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
+                String Query = "Update Root.AppointmentTbl set AppDate='" + simpledate.format(AppDate.getDate())+ "'" + ",  PATIENT='" + PatName.getSelectedItem().toString() + "'" + " ,  APPTIME='" + AppTime.getText() + "'" + " ,  TREATMENT='" + TreatName.getSelectedItem().toString() + "'" + "  where APPID=" + Key;
                 Statement Add = Con.createStatement();
                 Add.executeUpdate(Query);
                 JOptionPane.showMessageDialog(this, "Appointment Updated Successfully");
@@ -96,7 +103,8 @@ public class appointments extends user {
     private void DisplayAppointment() {
 
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
             St = (Statement) Con.createStatement();
             Rs = St.executeQuery("Select * from root.APPOINTMENTTBL ");
             AppointmentTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -108,7 +116,8 @@ public class appointments extends user {
     private void getPatient() {
 
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
             St = (Statement) Con.createStatement();
             String query = "Select * from root.PatientTbl ";
             Rs = St.executeQuery(query);
@@ -125,7 +134,8 @@ public class appointments extends user {
     private void getTreatment() {
 
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
             St = (Statement) Con.createStatement();
             String query = "Select * from root.TreatmentTbl  ";
             Rs = St.executeQuery(query);
@@ -345,6 +355,8 @@ public class appointments extends user {
         usernameDisplay.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         usernameDisplay.setForeground(new java.awt.Color(0, 51, 51));
         usernameDisplay.setText("User");
+
+        AppTime.setText("09 : 00 am");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

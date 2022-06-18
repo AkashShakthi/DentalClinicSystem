@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
@@ -47,9 +48,11 @@ public class patient extends user {
                     JOptionPane.showMessageDialog(this, "Check email again. email is not valid or check Internet connection");
                 } else {
                     try {
+                         SimpleDateFormat simpledate = new SimpleDateFormat("yyy-MM-dd");
                         // int PatKey = 1;
                         IdGenerator("PatId", "PatientTbl");
-                        Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                        Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                        Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
                         PreparedStatement add = Con.prepareStatement("insert into PatientTbl values(?,?,?,?,?,?,?,?)");
                         add.setInt(1, id);
                         add.setString(2, PatName.getText());
@@ -57,7 +60,7 @@ public class patient extends user {
                         add.setString(4, PatGender.getSelectedItem().toString());
                         add.setString(5, PatAllergies.getText());
                         add.setString(6, PatAddress.getText());
-                        add.setString(7, PatDOB.getDate().toString());
+                        add.setString(7, simpledate.format(PatDOB.getDate()));
                         add.setString(8, PatEmail.getText());
 
                         int row = add.executeUpdate();
@@ -91,9 +94,11 @@ public class patient extends user {
                 } else {
 
                     try {
-
-                        Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
-                        String Query = "Update Root.PatientTbl set PatName='" + PatName.getText() + "'" + ", PatMobile='" + PatMobile.getText() + "'" + ", PatEmail='" + PatEmail.getText() + "'" + ", PatGender='" + PatGender.getSelectedItem() + "'" + ", PatAllergies='" + PatAllergies.getText() + "'" + ", PatAddress='" + PatAddress.getText() + "'" + ", PatDOB='" + PatDOB.getDate().toString() + "'" + " where PatID=" + Key;
+                            SimpleDateFormat simpledate = new SimpleDateFormat("yyy-MM-dd");
+                      
+                        Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                        Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
+                        String Query = "Update Root.PatientTbl set PatName='" + PatName.getText() + "'" + ", PatMobile='" + PatMobile.getText() + "'" + ", PatEmail='" + PatEmail.getText() + "'" + ", PatGender='" + PatGender.getSelectedItem() + "'" + ", PatAllergies='" + PatAllergies.getText() + "'" + ", PatAddress='" + PatAddress.getText() + "'" + ", PatDOB='" + simpledate.format(PatDOB.getDate()) + "'" + " where PatID=" + Key;
                         Statement Add = Con.createStatement();
                         Add.executeUpdate(Query);
                         JOptionPane.showMessageDialog(this, "Patient Updated Successfully");
@@ -105,8 +110,7 @@ public class patient extends user {
                         Ex.printStackTrace();
                     }
                 }
-            } 
-            else {
+            } else {
 
                 JOptionPane.showMessageDialog(this, "This  Patient's Name already exsist");
 
@@ -120,7 +124,8 @@ public class patient extends user {
     protected void DisplayPatient() {
 
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
             St = (Statement) Con.createStatement();
             Rs = St.executeQuery("Select * from root.PatientTbl ");
             PatientTable.setModel(DbUtils.resultSetToTableModel(Rs));
@@ -590,12 +595,11 @@ public class patient extends user {
         PatGender.setSelectedItem(model.getValueAt(MyIndex, 3).toString());
         PatAllergies.setText(model.getValueAt(MyIndex, 4).toString());
         PatAddress.setText(model.getValueAt(MyIndex, 5).toString());
-        //PatDOB.setText(model.getValueAt(MyIndex, 6).toString());ccccccccccccccccccccccccccccccccccccccccccccccccccccc
         PatEmail.setText(model.getValueAt(MyIndex, 7).toString());
     }//GEN-LAST:event_PatientTableMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        // TODO add your handling code here:ddddddddddddddddddddddddddddddddddd
+      
         deleteData(Key, "PATID", "PATIENTTBL");
     }//GEN-LAST:event_jButton3MouseClicked
 

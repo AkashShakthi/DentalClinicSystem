@@ -35,7 +35,8 @@ public class treatment extends user {
                 // int PatKey = 1;
                 IdGenerator("TREATMENTId", "TREATMENTTbl");
 
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
                 PreparedStatement add = Con.prepareStatement("insert into TreatmentTbl values(?,?,?,?)");
                 add.setInt(1, id);
                 add.setString(2, TreatName.getText());
@@ -60,7 +61,8 @@ public class treatment extends user {
         } else {
             try {
 
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+                Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
                 String Query = "Update Root.TreatmentTbl set TREATMENTNAME='" + TreatName.getText() + "'" + ", TREATMENTCOST=" + TreatCost.getText() + "" + ", TREATMENTMED='" + TreatMed.getText() + "'" + "  where TREATMENTID=" + Key;
                 Statement Add = Con.createStatement();
                 Add.executeUpdate(Query);
@@ -79,7 +81,8 @@ public class treatment extends user {
     private void DisplayTreatment() {
 
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
             St = (Statement) Con.createStatement();
             Rs = St.executeQuery("Select * from root.TreatmentTbl ");
             TreatmentTable.setModel(DbUtils.resultSetToTableModel(Rs));

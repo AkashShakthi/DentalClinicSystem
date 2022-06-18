@@ -113,26 +113,25 @@ public class splash extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-       
         splash sp = new splash();
         sp.setVisible(true);
-        
+
         try {
-          
-          for(int i=0; i<=100; i++){
-              Thread.sleep(100);
-              sp.loadingbar.setValue(i);
-              sp.loadingbar.setForeground(Color.orange);
-              
-              if(i==100){
-                new Login().setVisible(true);
-                sp.setVisible(false);
-              }
-          }
-        }catch(Exception Ex){
-        
+
+            for (int i = 0; i <= 100; i++) {
+                Thread.sleep(100);
+                sp.loadingbar.setValue(i);
+                sp.loadingbar.setForeground(Color.orange);
+
+                if (i == 100) {
+                    new Login().setVisible(true);
+                    sp.setVisible(false);
+                }
+            }
+        } catch (Exception Ex) {
+
         }
-         
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

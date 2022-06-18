@@ -127,6 +127,7 @@ public class Dashboard extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     //for sql connections
+    String currentDir=System.getProperty("user.dir");
     Connection Con = null;
     Statement St = null, St1 = null, St2 = null, St3 = null;
     ResultSet Rs = null, Rs1 = null, Rs2 = null, Rs3 = null;
@@ -415,7 +416,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void receptionistDashboard() {
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
             St = Con.createStatement();
             St1 = Con.createStatement();
             Rs = St.executeQuery("select count(*) from Root.PATIENTTBL");
@@ -432,7 +434,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void DoctorDashboard() {
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:"+currentDir+"\\dentaldb", "root", "root");
             St = Con.createStatement();
             St1 = Con.createStatement();
             Rs = St.executeQuery("select count(*) from Root.TREATMENTTBL");
@@ -449,7 +452,8 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void adminDashboard() {
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:"+currentDir+"\\dentaldb", "root", "root");
             St = Con.createStatement();
             St1 = Con.createStatement();
             St2 = Con.createStatement();

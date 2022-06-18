@@ -9,16 +9,11 @@ package dentalclinicsystem;
  *
  * @author akash
  */
-
-public class DentalClinicSystem {   
-    
+public class DentalClinicSystem {
 
     public static void main(String[] args) {
         // TODO code application logic here
-        
-           
 
     }
-    
-}
 
+}

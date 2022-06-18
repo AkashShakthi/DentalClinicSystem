@@ -32,7 +32,8 @@ public class Login extends user {
         password = PasswordEncryptor(loggerpasword);
 
         try {
-            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Con = DriverManager.getConnection("jdbc:derby:" + currentDir + "\\dentaldb", "root", "root");
             St = (Statement) Con.createStatement();
             St1 = (Statement) Con.createStatement();
 
