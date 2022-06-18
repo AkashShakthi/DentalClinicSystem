@@ -18,8 +18,8 @@ public class receptionists extends user {
         //get this method from user classs and create user count function for user counting perpuses
         IdGenerator("USERID", "USERTBL");
 
-        //for display data on table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
+        //for displayData data on table
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayData(UserRolll.getSelectedItem().toString())));
 
         //display logedusername
         Login login = new Login();
@@ -463,9 +463,9 @@ public class receptionists extends user {
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
 
         // delete user
-        deleteuser(Key, "USERID", "USERTBL");
+        deleteData(Key, "USERID", "USERTBL");
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayData(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_deleteMouseClicked
@@ -473,9 +473,9 @@ public class receptionists extends user {
     private void editMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMouseClicked
 
         // editt  user
-        edituser(Key, RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
+        editData(Key, RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayData(UserRolll.getSelectedItem().toString())));
         //clear text field
         Clear();
     }//GEN-LAST:event_editMouseClicked
@@ -483,9 +483,9 @@ public class receptionists extends user {
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
 
         // save new user
-        createuser(RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
+        createData(RepName.getText(), RepEmail.getText(), RepPass.getText(), RepConPass.getText(), UserRolll.getSelectedItem().toString(), RepMobile.getText());
         //update table
-        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayuser(UserRolll.getSelectedItem().toString())));
+        ReceptionistTable.setModel(DbUtils.resultSetToTableModel(displayData(UserRolll.getSelectedItem().toString())));
         //cleat text field
         Clear();
     }//GEN-LAST:event_saveMouseClicked
@@ -547,7 +547,7 @@ public class receptionists extends user {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and displayData the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new receptionists().setVisible(true);

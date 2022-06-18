@@ -448,7 +448,7 @@ public class treatment extends user {
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
 
-        deleteuser(Key, "TreatmentId", "TreatmentTbl");
+        deleteData(Key, "TreatmentId", "TreatmentTbl");
         DisplayTreatment();
     }//GEN-LAST:event_deleteMouseClicked
 
@@ -506,7 +506,7 @@ public class treatment extends user {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and displayData the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new treatment().setVisible(true);

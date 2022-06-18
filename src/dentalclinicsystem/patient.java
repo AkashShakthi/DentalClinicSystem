@@ -1,4 +1,3 @@
-
 package dentalclinicsystem;
 
 import java.sql.Statement;
@@ -16,124 +15,132 @@ import net.proteanit.sql.DbUtils;
  */
 public class patient extends user {
 
- 
     public patient() {
         initComponents();
         DisplayPatient();
-   
+
         //generate id for new patient
-        IdGenerator("PatId","PatientTbl");
-         
-       //display logedusername
+        IdGenerator("PatId", "PatientTbl");
+
+        //display logedusername
         Login login = new Login();
-       usernameDisplay.setText(login.LoggerName());
+        usernameDisplay.setText(login.LoggerName());
 
     }
-    
 
 // addpatient
- protected void addpatient(){
-           if (CheckDataAlradyExist(PatName.getText(),"PATNAME","PATIENTTBL","PATID") != 0) {
+    protected void addpatient() {
+
+        emailcontroler checkemail = new emailcontroler();
+        checkemail.emailValidater(PatName.getText(), PatEmail.getText());
+        checkemail.emailSender();
+
+        if (CheckDataAlradyExist(PatName.getText(), "PATNAME", "PATIENTTBL", "PATID") != 0) {
             JOptionPane.showMessageDialog(this, "This Patient is already exsist");
-        
-           }
-        else{
-        
-        if(PatName.getText().isEmpty() || PatEmail.getText().isEmpty() ||PatAllergies.getText().isEmpty() ||PatMobile.getText().isEmpty() || PatAddress.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "Missing Information");
-        }else{
-            try{
-               // int PatKey = 1;
-                IdGenerator("PatId","PatientTbl");
-                Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-                PreparedStatement add = Con.prepareStatement("insert into PatientTbl values(?,?,?,?,?,?,?,?)");
-                add.setInt(1, id);
-                add.setString(2, PatName.getText());
-                add.setString(3, PatMobile.getText());
-                add.setString(4, PatGender.getSelectedItem().toString() );
-                add.setString(5, PatAllergies.getText());
-                add.setString(6, PatAddress.getText());
-                add.setString(7, PatDOB.getDate().toString());
-                add.setString(8, PatEmail.getText());
-          
-              
-               int row = add.executeUpdate();
-                 JOptionPane.showMessageDialog(this, "Patient Added Successfully");
-               Con.close();
-                DisplayPatient();
-                  Clear();
-            }catch(Exception Ex){
-                Ex.printStackTrace();
+
+        } else {
+
+            if (PatName.getText().isEmpty() || PatEmail.getText().isEmpty() || PatAllergies.getText().isEmpty() || PatMobile.getText().isEmpty() || PatAddress.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Missing Information");
+            } else {
+                if (checkemail.chekIsEmailVerified == false) {
+                    JOptionPane.showMessageDialog(this, "Check email again. email is not valid or check Internet connection");
+                } else {
+                    try {
+                        // int PatKey = 1;
+                        IdGenerator("PatId", "PatientTbl");
+                        Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                        PreparedStatement add = Con.prepareStatement("insert into PatientTbl values(?,?,?,?,?,?,?,?)");
+                        add.setInt(1, id);
+                        add.setString(2, PatName.getText());
+                        add.setString(3, PatMobile.getText());
+                        add.setString(4, PatGender.getSelectedItem().toString());
+                        add.setString(5, PatAllergies.getText());
+                        add.setString(6, PatAddress.getText());
+                        add.setString(7, PatDOB.getDate().toString());
+                        add.setString(8, PatEmail.getText());
+
+                        int row = add.executeUpdate();
+                        JOptionPane.showMessageDialog(this, "Patient Added Successfully");
+                        Con.close();
+                        DisplayPatient();
+                        Clear();
+                    } catch (Exception Ex) {
+                        Ex.printStackTrace();
+                    }
+                }
             }
-    }}
- 
- } 
-   //edit patient
- protected void editpatient(){
-   //chek patient name and email is already exsit in other ids   
-    
-    
-                            if(Key == 0){
-                                JOptionPane.showMessageDialog(this, "Select The Patient");
-                            }else if (CheckDataAlradyExist(PatName.getText(),"PATNAME","PATIENTTBL","PATID") != 0  ){
-                             
-                                    if(CheckDataAlradyExist(PatName.getText(),"PATNAME","PATIENTTBL","PATID") == Key  ){
-                                                   try{
+        }
 
-                                    Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-                                   String Query = "Update Root.PatientTbl set PatName='"+PatName.getText()+"'"+", PatMobile='"+PatMobile.getText()+"'"+", PatEmail='"+PatEmail.getText()+"'"+", PatGender='"+PatGender.getSelectedItem()+"'"+", PatAllergies='"+PatAllergies.getText()+"'"+", PatAddress='"+PatAddress.getText()+"'"+", PatDOB='"+PatDOB.getDate().toString()+"'"+" where PatID="+Key;
-                                   Statement Add = Con.createStatement();
-                                   Add.executeUpdate(Query);
-                                   JOptionPane.showMessageDialog(this, "Patient Updated Successfully");
+    }
+    //edit patient
 
-                                    DisplayPatient();
-                                       Clear();
+    protected void editpatient() {
+        emailcontroler checkemail = new emailcontroler();
+        checkemail.emailValidater(PatName.getText(), PatEmail.getText());
+        checkemail.emailSender();
 
-                                }catch(Exception Ex){
-                                    Ex.printStackTrace();
-                                }
-                                    }else{
-                                    
-                                                JOptionPane.showMessageDialog(this, "This  Patient's Name already exsist");
-                                    
-                                    }
-                                 
-                            
-                            }
-       
-         
-         
+        //chek patient name and  is already exsit in other ids   
+        if (Key == 0) {
+            JOptionPane.showMessageDialog(this, "Select The Patient");
+        } else if (CheckDataAlradyExist(PatName.getText(), "PATNAME", "PATIENTTBL", "PATID") != 0) {
 
- }
- 
- //display patient
-    protected void DisplayPatient(){
-    
-     try{
-         Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
-         St = (Statement) Con.createStatement();
-         Rs = St.executeQuery("Select * from root.PatientTbl ");
-         PatientTable.setModel(DbUtils.resultSetToTableModel(Rs));
-     }catch(Exception Ex){
-               
+            if (CheckDataAlradyExist(PatName.getText(), "PATNAME", "PATIENTTBL", "PATID") == Key) {
+                if (checkemail.chekIsEmailVerified == false) {
+                    JOptionPane.showMessageDialog(this, "Check email again. email is not valid or check Internet connection");
+                } else {
+
+                    try {
+
+                        Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+                        String Query = "Update Root.PatientTbl set PatName='" + PatName.getText() + "'" + ", PatMobile='" + PatMobile.getText() + "'" + ", PatEmail='" + PatEmail.getText() + "'" + ", PatGender='" + PatGender.getSelectedItem() + "'" + ", PatAllergies='" + PatAllergies.getText() + "'" + ", PatAddress='" + PatAddress.getText() + "'" + ", PatDOB='" + PatDOB.getDate().toString() + "'" + " where PatID=" + Key;
+                        Statement Add = Con.createStatement();
+                        Add.executeUpdate(Query);
+                        JOptionPane.showMessageDialog(this, "Patient Updated Successfully");
+
+                        DisplayPatient();
+                        Clear();
+
+                    } catch (Exception Ex) {
+                        Ex.printStackTrace();
+                    }
+                }
+            } 
+            else {
+
+                JOptionPane.showMessageDialog(this, "This  Patient's Name already exsist");
+
             }
+
+        }
+
     }
-    
- // clear text field data
-  protected void Clear(){
-     PatName.setText("");
-     PatMobile.setText("");
-     PatEmail.setText("");
-     PatAllergies.setText("");
-     PatAddress.setText("");
-     PatDOB.setCalendar(null);
-     PatGender.setSelectedItem("");
-     
-     
+
+    //display patient
+    protected void DisplayPatient() {
+
+        try {
+            Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
+            St = (Statement) Con.createStatement();
+            Rs = St.executeQuery("Select * from root.PatientTbl ");
+            PatientTable.setModel(DbUtils.resultSetToTableModel(Rs));
+        } catch (Exception Ex) {
+
+        }
     }
- 
- 
-  
+
+    // clear text field data
+    protected void Clear() {
+        PatName.setText("");
+        PatMobile.setText("");
+        PatEmail.setText("");
+        PatAllergies.setText("");
+        PatAddress.setText("");
+        PatDOB.setCalendar(null);
+        PatGender.setSelectedItem("");
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -557,24 +564,22 @@ public class patient extends user {
     }//GEN-LAST:event_PatAddressActionPerformed
 
 
- 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:gfghfgfgfgfgfgfgdsfgdfgdfgdfdsf
         addpatient();
-      
+
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void PatAllergiesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PatAllergiesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PatAllergiesActionPerformed
 
-    
-    
+
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-       editpatient();
+        editpatient();
     }//GEN-LAST:event_jButton1MouseClicked
 
-    int Key=0;
+    int Key = 0;
     private void PatientTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PatientTableMouseClicked
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) PatientTable.getModel();
@@ -582,21 +587,21 @@ public class patient extends user {
         Key = Integer.valueOf(model.getValueAt(MyIndex, 0).toString());
         PatName.setText(model.getValueAt(MyIndex, 1).toString());
         PatMobile.setText(model.getValueAt(MyIndex, 2).toString());
-        PatGender.setSelectedItem(model.getValueAt(MyIndex,3).toString());
+        PatGender.setSelectedItem(model.getValueAt(MyIndex, 3).toString());
         PatAllergies.setText(model.getValueAt(MyIndex, 4).toString());
         PatAddress.setText(model.getValueAt(MyIndex, 5).toString());
         //PatDOB.setText(model.getValueAt(MyIndex, 6).toString());ccccccccccccccccccccccccccccccccccccccccccccccccccccc
-         PatEmail.setText(model.getValueAt(MyIndex, 7).toString());
+        PatEmail.setText(model.getValueAt(MyIndex, 7).toString());
     }//GEN-LAST:event_PatientTableMouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:ddddddddddddddddddddddddddddddddddd
-         deleteuser(Key, "PATID", "PATIENTTBL");
+        deleteData(Key, "PATID", "PATIENTTBL");
     }//GEN-LAST:event_jButton3MouseClicked
 
-   
+
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
-       Clear();
+        Clear();
     }//GEN-LAST:event_jButton4MouseClicked
 
     private void PatientlabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PatientlabelMouseClicked
@@ -619,11 +624,10 @@ public class patient extends user {
 
     private void dashboardlabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardlabelMouseClicked
         // TODO add your handling code here:
-         new Dashboard().setVisible(true);
+        new Dashboard().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_dashboardlabelMouseClicked
 
- 
     /**
      * @param args the command line arguments
      */
@@ -651,7 +655,7 @@ public class patient extends user {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and displayData the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new patient().setVisible(true);

@@ -52,7 +52,7 @@ public class appointments extends user {
 
                 //send emailSender to the patient
                 emailcontroler m = new emailcontroler();
-                m.getAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
+                m.getNewAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
                 m.emailSender();
 
                 //clear text data
@@ -81,7 +81,7 @@ public class appointments extends user {
 
                 //send emailSender to the patient
                 emailcontroler m = new emailcontroler();
-                m.getAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
+                m.getUpdatedAppointmentMailData(PatName.getSelectedItem().toString(), TreatName.getSelectedItem().toString(), AppDate.getDate().toString(), AppTime.getText());
                 m.emailSender();
 
                 //clear text data
@@ -352,24 +352,18 @@ public class appointments extends user {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(271, 271, 271)
                         .addComponent(jLabel19)
                         .addContainerGap(280, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(153, 153, 153)
                         .addComponent(jLabel16)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel17)
                         .addGap(210, 210, 210))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel18)
-                        .addGap(195, 195, 195))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(97, 97, 97)
@@ -391,7 +385,7 @@ public class appointments extends user {
                                 .addComponent(AppTime, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(TreatName, javax.swing.GroupLayout.Alignment.LEADING, 0, 161, Short.MAX_VALUE)))
                         .addGap(58, 58, 58))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,7 +395,13 @@ public class appointments extends user {
                                 .addComponent(usernameDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel12)))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel18)
+                        .addGap(197, 197, 197))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -411,7 +411,7 @@ public class appointments extends user {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TreatName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -498,7 +498,7 @@ public class appointments extends user {
 
     private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
 
-        deleteuser(Key, "AppId", "AppointmentTbl");
+        deleteData(Key, "AppId", "AppointmentTbl");
         DisplayAppointment();
     }//GEN-LAST:event_deleteMouseClicked
 
@@ -550,7 +550,7 @@ public class appointments extends user {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and displayData the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new appointments().setVisible(true);

@@ -27,6 +27,7 @@ public class user extends javax.swing.JFrame {
     Statement St = null, St1 = null, St2 = null ,St3 =null;
     ResultSet Rs = null, Rs1 = null, Rs2 = null ,Rs3 =null;
 
+    
     int id = 0;
     String Name;
     String email;
@@ -51,7 +52,7 @@ public class user extends javax.swing.JFrame {
 
 
     // class for create new user
-    public void createuser(String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
+    public void createData(String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
 
         this.Name = Name;
         this.email = email;
@@ -59,14 +60,24 @@ public class user extends javax.swing.JFrame {
         this.conPassword = PasswordEncryptor(conPass);
         this.userRoll = userRoll;
         this.userMobile = userMobile;
+        
+        
+        emailcontroler checkemail = new emailcontroler();
+        checkemail.emailValidater(Name,email);
+        checkemail.emailSender();
+        
 
         if (Name.isEmpty() || email.isEmpty() || password.isEmpty() || conPassword.isEmpty() || userMobile.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Missing Information");
-        } else if (!password.equals(conPassword)) {
+        }
+        else if (!password.equals(conPassword)) {
             JOptionPane.showMessageDialog(this, "Password Missmatch");
         } else if (CheckDataAlradyExist(email,"USEREMAIL","USERTBL","USERID") != 0) {
             JOptionPane.showMessageDialog(this, "This email's user already exsist");
         } else {
+            if( checkemail.chekIsEmailVerified == false){
+            JOptionPane.showMessageDialog(this, "Check email again. email is not valid or check Internet connection");
+           }else{
 
             try {
                IdGenerator("USERID","USERTBL");
@@ -88,6 +99,7 @@ public class user extends javax.swing.JFrame {
             } catch (Exception Ex) {
                 Ex.printStackTrace();
             }
+        }
 
         }
 
@@ -95,7 +107,7 @@ public class user extends javax.swing.JFrame {
 
 
     // class for edit user
-    public void edituser(int Key, String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
+    public void editData(int Key, String Name, String email, String pass, String conPass, String userRoll, String userMobile) {
 
         this.Name = Name;
         this.email = email;
@@ -103,6 +115,11 @@ public class user extends javax.swing.JFrame {
         this.conPassword = PasswordEncryptor(conPass);
         this.userRoll = userRoll;
         this.userMobile = userMobile;
+        
+            
+        emailcontroler checkemail = new emailcontroler();
+        checkemail.emailValidater(Name,email);
+        checkemail.emailSender();
 
         if (Key == 0) {
             JOptionPane.showMessageDialog(this, "Select The user");
@@ -110,6 +127,11 @@ public class user extends javax.swing.JFrame {
         else if (CheckDataAlradyExist(email,"USEREMAIL","USERTBL","USERID") != 0  ) {
              
             if(CheckDataAlradyExist(email,"USEREMAIL","USERTBL","USERID") == Key){
+                
+                 if( checkemail.chekIsEmailVerified == false){
+            JOptionPane.showMessageDialog(this, "Check email again. email is not valid or check Internet connection");
+           }else{
+
                  try {
                 Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
                 String Query;
@@ -140,6 +162,7 @@ public class user extends javax.swing.JFrame {
             } catch (Exception Ex) {
                 Ex.printStackTrace();
             }
+                 }
             }else{
                 JOptionPane.showMessageDialog(this, "This email's user already exsist");
             }
@@ -148,7 +171,7 @@ public class user extends javax.swing.JFrame {
     }
 
 
-    public void deleteuser(int Key, String ColumenNameOfID, String tableName) {
+    public void deleteData(int Key, String ColumenNameOfID, String tableName) {
 
         if (Key == 0) {
             JOptionPane.showMessageDialog(this, "Select First");
@@ -167,8 +190,8 @@ public class user extends javax.swing.JFrame {
         }
     }
 
-    // class for display user data on table
-    public ResultSet displayuser(String UserRoll) {
+    // class for displayData user data on table
+    public ResultSet displayData(String UserRoll) {
 
         try {
             Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb", "root", "root");
@@ -183,9 +206,9 @@ public class user extends javax.swing.JFrame {
 
 
      //password encrpted
-    static String text;
+   
     public String PasswordEncryptor(String text) {
-        this.text = text;
+       
         String passwordToHash = text;
         String generatedPassword = null;
 

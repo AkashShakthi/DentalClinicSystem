@@ -50,7 +50,7 @@ public class emailcontrolerTest {
     }
 
     /**
-     * Test of getAppointmentMailData method, of class emailcontroler.
+     * Test of getNewAppointmentMailData method, of class emailcontroler.
      */
     @Test
     public void testGetAppointmentMailData() {
@@ -60,7 +60,7 @@ public class emailcontrolerTest {
         String date = "";
         String time = "";
         emailcontroler instance = new emailcontroler();
-        instance.getAppointmentMailData(name, treat, date, time);
+        instance.getNewAppointmentMailData(name, treat, date, time);
         // TODO review the generated test code and remove the default call to fail.
        // fail("The test case is a prototype.");
     }

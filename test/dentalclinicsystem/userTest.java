@@ -53,7 +53,7 @@ public class userTest {
     }
 
     /**
-     * Test of createuser method, of class user.
+     * Test of createData method, of class user.
      */
     @Test
     public void testCreateuser() {
@@ -65,13 +65,13 @@ public class userTest {
         String userRoll = "";
         String userMobile = "";
         user instance = new user();
-        instance.createuser(Name, email, pass, conPass, userRoll, userMobile);
+        instance.createData(Name, email, pass, conPass, userRoll, userMobile);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of edituser method, of class user.
+     * Test of editData method, of class user.
      */
     @Test
     public void testEdituser() {
@@ -84,13 +84,13 @@ public class userTest {
         String userRoll = "";
         String userMobile = "";
         user instance = new user();
-        instance.edituser(Key, Name, email, pass, conPass, userRoll, userMobile);
+        instance.editData(Key, Name, email, pass, conPass, userRoll, userMobile);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");
     }
 
     /**
-     * Test of deleteuser method, of class user.
+     * Test of deleteData method, of class user.
      */
     @Test
     public void testDeleteuser() {
@@ -99,7 +99,7 @@ public class userTest {
         String ColumenNameOfID = "";
         String tableName = "";
         user instance = new user();
-        instance.deleteuser(Key, ColumenNameOfID, tableName);
+        instance.deleteData(Key, ColumenNameOfID, tableName);
         // TODO review the generated test code and remove the default call to fail.
       //  fail("The test case is a prototype.");
     }
@@ -109,11 +109,11 @@ public class userTest {
      */
  /*   @Test
     public void testDisplayuser() {
-        System.out.println("displayuser");
+        System.out.println("displayData");
         String UserRoll = "";
         user instance = new user();
         ResultSet expResult = null;
-        ResultSet result = instance.displayuser(UserRoll);
+        ResultSet result = instance.displayData(UserRoll);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
       //  fail("The test case is a prototype.");

@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 public class emailcontroler extends javax.swing.JFrame{
     
     String from, to, host, sub,content;
-    
+       boolean chekIsEmailVerified;
     
     public void emailSender(){
         
@@ -52,14 +52,14 @@ public class emailcontroler extends javax.swing.JFrame{
             m.setSubject(sub);
             m.setText(content);
             Transport transport;
-           transport = s.getTransport("smtps");
+            transport = s.getTransport("smtps");
             transport.send(m);
             System.out.println("Success");
-            
+            this.chekIsEmailVerified =true;
             
         }catch(MessagingException E){
           E.printStackTrace();
-    
+          chekIsEmailVerified =false;
         }
     }
     
@@ -79,8 +79,19 @@ ResultSet Rs = null, Rs1 = null;
  static   int treatcost; 
    
 
-    
- public  void getAppointmentMailData(String name, String treat, String date, String time){
+public void emailValidater(String name, String email){
+     try{
+         this.to=email;
+         this.sub = "Dental Clinic ";
+         this.content = "Hello.."+name+" Thank you for Registering with us. You have successfully registerd with us"; 
+
+          
+     }catch(Exception Ex){
+              Ex.printStackTrace(); 
+            }
+
+}
+ public  void getNewAppointmentMailData(String name, String treat, String date, String time){
         
      try{
          Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
@@ -106,8 +117,40 @@ ResultSet Rs = null, Rs1 = null;
               Ex.printStackTrace(); 
             }
     }    
+ 
+ 
+ public  void getUpdatedAppointmentMailData(String name, String treat, String date, String time){
         
-   
+     try{
+         Con = DriverManager.getConnection("jdbc:derby://localhost:1527/dentaldb","root","root");
+         St = (Statement) Con.createStatement();
+         Rs = St.executeQuery("Select * from root.PATIENTTBL where PATNAME='"+name+"'");
+         St1 = (Statement) Con.createStatement();
+         Rs1 = St1.executeQuery("Select TREATMENTCOST from root.TREATMENTTBL where TREATMENTNAME='"+treat+"'");
+        Rs.next();
+         Rs1.next();
+        
+        this.to = Rs.getString("PATEMAIL");
+         this.reciverName = name;
+         this.appointDate = date;
+         this.appointTime = time;
+         this.treatcost = Rs1.getInt("TREATMENTCOST");
+       
+         this.sub = "Hello " +reciverName+" This is your Dental Clinic Appointment Details. ";
+         this.content = "YOUR APPOINMENT IS UPDATED....  Your "+treat+" Appintment Date is : "+appointDate+" and Time is : "+appointTime+". The Treatment Payment is: Rs."+treatcost+".00 /=  Thank you. "; 
+        
+         
+          
+     }catch(Exception Ex){
+              Ex.printStackTrace(); 
+            }
+    }    
+        
+ 
+ 
+  
+  
+  
     public static void main(String[] args) {
   
        
